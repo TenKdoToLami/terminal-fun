@@ -15,7 +15,7 @@ TARGET = main.out
 $(BINDIR)/$(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-$(BINDIR)/%.o: $(SRCDIR)/%.cpp
+$(BINDIR)/%.o: $(SRCDIR)/%.cpp | $(BINDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $< -I$(INCDIR)
 
 -include $(OBJS:.o=.d)
@@ -30,6 +30,7 @@ clean:
 	rm -rf $(BINDIR)/*.d
 	rm -rf $(DOCDIR)
 	rmdir $(BINDIR)
+
 run: $(BINDIR)/$(TARGET)
 	./$(BINDIR)/$(TARGET)
 

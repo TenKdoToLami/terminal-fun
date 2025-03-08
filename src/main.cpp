@@ -1,4 +1,5 @@
-//#include "main.h"
+#include "TerminalControl.h"
+
 
 int main(void)
 {
