@@ -1,5 +1,6 @@
 #include "Color.h"
 
+
 namespace Colors
 {
     const Color RED(255, 0, 0);
