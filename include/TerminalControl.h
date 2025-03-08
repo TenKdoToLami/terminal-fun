@@ -20,13 +20,6 @@ public:
     void getTerminalSize();
 
 private:
-    /**
-     * @brief Width of the terminal in columns.
-     */
-    size_t width;
-
-    /**
-     * @brief Height of the terminal in rows.
-     */
-    size_t height;
+    size_t width;           ///< Width of the terminal in columns.
+    size_t height;          ///< Height of the terminal in rows.
 };
