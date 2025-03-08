@@ -4,36 +4,29 @@
 #include <unistd.h>
 
 
-
-class terminalControl
+class TerminalControl
 {
 public:
 
-
     /**
-     * @brief Gets the current terminal size (width and height).
+     * @brief Retrieves the current terminal size.
      *
-     * This function retrieves the current size of the terminal window
-     * and stores the values in the `width` and `height` member variables.
-     * It uses the `ioctl` system call to retrieve terminal information.
+     * This function queries the terminal for its current dimensions (columns and rows)
+     * and updates the `width` and `height` member variables accordingly.
      *
-     * @note This function only works for terminals that support the
-     *       `TIOCGWINSZ` ioctl command.
+     * @note This function is platform-dependent and only works on terminals that
+     *       support the `TIOCGWINSZ` ioctl command (POSIX systems).
      */
-    void getTerminalSize();
+    void GetTerminalSize();
 
 private:
     /**
-     * @brief Stores the width of the terminal.
-     *
-     * This variable stores the width (number of columns) of the terminal.
+     * @brief Width of the terminal in columns.
      */
-    size_t width;
+    size_t Width;
 
     /**
-     * @brief Stores the height of the terminal.
-     *
-     * This variable stores the height (number of rows) of the terminal.
+     * @brief Height of the terminal in rows.
      */
-    size_t height;
+    size_t Height;
 };

@@ -37,3 +37,6 @@ CMakeFiles/
 
 # Ignore generated Makefiles (if CMake is used)
 Makefile
+
+# Ignore doxygen generated documentation
+docs
