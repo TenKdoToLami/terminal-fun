@@ -1,5 +1,6 @@
 #pragma once
 
+
 /**
  * @file color.h
  * @brief Defines the Color struct and a set of predefined colors.
@@ -23,6 +24,7 @@ struct Color
     int green; ///< Green component (0-255)
     int blue;  ///< Blue component (0-255)
 
+
     /**
      * @brief Constructs a Color with specified RGB values.
      *
@@ -30,7 +32,7 @@ struct Color
      * @param g Green component (0-255)
      * @param b Blue component (0-255)
      */
-    constexpr Color(int r, int g, int b) : red(r), green(g), blue(b) {}
+    constexpr Color(int r, int g, int b) : red(r), green(g), blue(b) {};
 };
 
 /**

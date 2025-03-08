@@ -1,7 +1,11 @@
 #pragma once
 
+
 #include <iostream>
+
+
 #include "Color.h"
+
 
 /**
  * @class OneSymbol
@@ -15,6 +19,7 @@ class OneSymbol
 {
 public:
 
+
     /**
      * @brief Constructs a OneSymbol object with a given character and colors.
      *
@@ -27,6 +32,7 @@ public:
      */
     OneSymbol(const char Symbol, const Color & ForegroundColor, const Color & BackgroundColor);
 
+
     /**
      * @brief Constructs a OneSymbol object with only colors, defaulting the symbol to a space (' ').
      *
@@ -38,6 +44,7 @@ public:
      */
     OneSymbol(const Color & ForegroundColor, const Color & BackgroundColor);
 
+    
     /**
      * @brief Overloads the output stream operator to display a OneSymbol object.
      *
@@ -50,6 +57,7 @@ public:
      */
     friend std::ostream & operator << (std::ostream & os, const OneSymbol & oneSymbol);
 
+    
 private:
     char symbol;                  ///< The character symbol represented by the OneSymbol object.
     Color foregroundColor;        ///< The foreground color of the symbol.

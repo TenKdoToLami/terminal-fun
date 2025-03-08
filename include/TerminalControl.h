@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <sys/ioctl.h>
 #include <unistd.h>
 
@@ -7,7 +8,6 @@
 class TerminalControl
 {
 public:
-
     /**
      * @brief Retrieves the current terminal size.
      *
@@ -19,6 +19,7 @@ public:
      */
     void getTerminalSize();
 
+    
 private:
     size_t width;           ///< Width of the terminal in columns.
     size_t height;          ///< Height of the terminal in rows.
