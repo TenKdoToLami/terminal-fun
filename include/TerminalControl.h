@@ -17,16 +17,16 @@ public:
      * @note This function is platform-dependent and only works on terminals that
      *       support the `TIOCGWINSZ` ioctl command (POSIX systems).
      */
-    void GetTerminalSize();
+    void getTerminalSize();
 
 private:
     /**
      * @brief Width of the terminal in columns.
      */
-    size_t Width;
+    size_t width;
 
     /**
      * @brief Height of the terminal in rows.
      */
-    size_t Height;
+    size_t height;
 };

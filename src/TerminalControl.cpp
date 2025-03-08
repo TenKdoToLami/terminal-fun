@@ -1,7 +1,7 @@
 #include "TerminalControl.h"
 
 
-void terminalControl::getTerminalSize()
+void TerminalControl::getTerminalSize()
 {
 	struct winsize w;
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0)
