@@ -4,12 +4,13 @@ CXXFLAGS ?= -std=c++23 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-con
 SRCDIR = src
 INCDIR = include
 BINDIR = bin
+DOCDIR = docs
 
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(addprefix $(BINDIR)/, $(notdir $(SRCS:.cpp=.o)))
 TARGET = main.out
 
-.PHONY: compile clean run release debug
+.PHONY: compile clean run release debug docs
 
 $(BINDIR)/$(TARGET): $(BINDIR) $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
@@ -26,9 +27,13 @@ compile: $(BINDIR)/$(TARGET)
 
 clean:
 	rm -f $(OBJS) $(BINDIR)/$(TARGET)
+	rm -rf $(DOCDIR)
 
 run: $(BINDIR)/$(TARGET)
 	./$(BINDIR)/$(TARGET)
 
 release: CXXFLAGS += -O2 -march=native
 debug: CXXFLAGS += -g -O0 -fsanitize=address,undefined
+
+docs:
+	doxygen Doxyfile
