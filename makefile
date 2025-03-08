@@ -1,5 +1,5 @@
 CXX ?= g++
-CXXFLAGS ?= -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Werror -MMD -MP -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIC
+CXXFLAGS ?= -std=c++23 -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Werror -MMD -MP -fstack-protector-strong -D_FORTIFY_SOURCE=2 -fPIC
 
 SRCDIR = src
 INCDIR = include
