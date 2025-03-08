@@ -12,7 +12,7 @@ TARGET = main.out
 
 .PHONY: compile clean run release debug docs
 
-$(BINDIR)/$(TARGET): $(BINDIR) $(OBJS)
+$(BINDIR)/$(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 $(BINDIR)/%.o: $(SRCDIR)/%.cpp
@@ -26,9 +26,10 @@ $(BINDIR):
 compile: $(BINDIR)/$(TARGET)
 
 clean:
-	rm -f $(OBJS) $(BINDIR)/$(TARGET)
+	rm -rf $(OBJS) $(BINDIR)/$(TARGET)
+	rm -rf $(BINDIR)/*.d
 	rm -rf $(DOCDIR)
-
+	rmdir $(BINDIR)
 run: $(BINDIR)/$(TARGET)
 	./$(BINDIR)/$(TARGET)
 
