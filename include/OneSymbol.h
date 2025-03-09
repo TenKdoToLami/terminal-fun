@@ -58,7 +58,7 @@ public:
     friend std::ostream & operator << (std::ostream & os, const OneSymbol & oneSymbol);
 
     
-private:
+//private:
     char symbol;                  ///< The character symbol represented by the OneSymbol object.
     Color foregroundColor;        ///< The foreground color of the symbol.
     Color backgroundColor;        ///< The background color of the symbol.

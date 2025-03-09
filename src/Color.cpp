@@ -1,6 +1,24 @@
 #include "Color.h"
 
 
+int Color::getRed() const
+{
+    return std::clamp(int(red), 0, 255);
+}
+
+
+int Color::getBlue() const
+{
+    return std::clamp(int(blue), 0, 255);
+}
+
+
+int Color::getGreen() const
+{
+    return std::clamp(int(green), 0, 255);
+}
+
+
 namespace Colors
 {
     const Color RED(255, 0, 0);

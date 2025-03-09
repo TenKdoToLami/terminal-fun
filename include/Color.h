@@ -1,6 +1,4 @@
 #pragma once
-
-
 /**
  * @file color.h
  * @brief Defines the Color struct and a set of predefined colors.
@@ -10,7 +8,10 @@
  * by hue for easy reference.
  */
 
-#include <cstdint>
+
+#include <cmath>
+#include <algorithm>
+
 
 /**
  * @brief Represents an RGB color.
@@ -20,11 +21,6 @@
  */
 struct Color
 {
-    int red;   ///< Red component (0-255)
-    int green; ///< Green component (0-255)
-    int blue;  ///< Blue component (0-255)
-
-
     /**
      * @brief Constructs a Color with specified RGB values.
      *
@@ -32,7 +28,36 @@ struct Color
      * @param g Green component (0-255)
      * @param b Blue component (0-255)
      */
-    constexpr Color(int r, int g, int b) : red(r), green(g), blue(b) {};
+    constexpr Color(double Red, double Green, double Blue) : red(Red), green(Green), blue(Blue) {};
+
+
+    /**
+     * @brief Retrieves the red component as an integer (0-255).
+     *
+     * @return int Rounded and clamped red value.
+     */
+    int getRed() const;
+
+
+    /**
+     * @brief Retrieves the green component as an integer (0-255).
+     *
+     * @return int Rounded and clamped green value.
+     */
+    int getGreen() const;
+
+
+    /**
+     * @brief Retrieves the blue component as an integer (0-255).
+     *
+     * @return int Rounded and clamped blue value.
+     */
+    int getBlue() const;
+
+private:
+    double red;   ///< Red component (0-255)
+    double green; ///< Green component (0-255)
+    double blue;  ///< Blue component (0-255)
 };
 
 /**

@@ -13,9 +13,9 @@ std::ostream &operator<<(std::ostream &os, const OneSymbol & oneSymbol)
 {
     const auto & [symbol,foregroundColor,backgroundColor] = oneSymbol;
     os  << "\033[38;2;"
-        << foregroundColor.red << ";" << foregroundColor.green << ";" << foregroundColor.blue << "m"
+        << foregroundColor.getRed() << ";" << foregroundColor.getGreen() << ";" << foregroundColor.getBlue() << "m"
         << "\033[48;2;"
-        << backgroundColor.red << ";" << backgroundColor.green << ";" << backgroundColor.blue << "m"
+        << backgroundColor.getRed() << ";" << backgroundColor.getGreen() << ";" << backgroundColor.getBlue() << "m"
         << symbol
         << "\033[0m";
         
