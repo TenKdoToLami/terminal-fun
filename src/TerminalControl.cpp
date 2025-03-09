@@ -12,3 +12,11 @@ void TerminalControl::getTerminalSize()
 
 	return;
 }
+
+void TerminalControl::clearTerminal() const
+{
+	std::cout << "\033[H";		///< Move cursor to home and clear screen
+	std::cout.flush();
+	
+	return;
+}

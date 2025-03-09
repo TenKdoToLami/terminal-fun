@@ -3,6 +3,7 @@
 
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <iostream>
 
 
 class TerminalControl
@@ -19,7 +20,16 @@ public:
      */
     void getTerminalSize();
 
-    
+
+    /**
+     * @brief Clears the terminal screen.
+     *
+     * This method sends an ANSI escape sequence to move the cursor
+     * to the home position and clear the screen. It is effective in
+     * most UNIX-based terminals and ANSI-compatible environments.
+     */
+    void clearTerminal() const;
+
 private:
     size_t width;           ///< Width of the terminal in columns.
     size_t height;          ///< Height of the terminal in rows.
