@@ -13,10 +13,22 @@ void TerminalControl::getTerminalSize()
 	return;
 }
 
+
 void TerminalControl::clearTerminal() const
 {
 	std::cout << "\033[H";		///< Move cursor to home and clear screen
 	std::cout.flush();
 	
+	return;
+}
+
+
+void TerminalControl::setTerminalSize()
+{
+	terminalGrid.resize(height);
+
+	for (int i = 0; i < height; i++)
+		terminalGrid[i].resize(width);
+
 	return;
 }

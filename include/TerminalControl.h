@@ -6,6 +6,8 @@
 #include <iostream>
 
 
+#include "OneSymbol.h"
+
 class TerminalControl
 {
 public:
@@ -30,7 +32,21 @@ public:
      */
     void clearTerminal() const;
 
+
+    /**
+    * @brief Resizes the terminal grid to match the specified dimensions.
+    *
+    * This function adjusts the size of the `terminalGrid` to match the
+    * current `height` and `width`. It ensures that each row is resized
+    * correctly to maintain a consistent grid structure.
+    *
+    * @note Assumes `height` and `width` must be already set.
+    */
+    void setTerminalSize();
+
 private:
     size_t width;           ///< Width of the terminal in columns.
     size_t height;          ///< Height of the terminal in rows.
+
+    std::vector < std::vector < OneSymbol > > terminalGrid;
 };
