@@ -20,6 +20,9 @@ class OneSymbol
 public:
 
 
+    OneSymbol();
+
+    
     /**
      * @brief Constructs a OneSymbol object with a given character and colors.
      *

@@ -1,5 +1,8 @@
 #include "OneSymbol.h"
 
+OneSymbol::OneSymbol()
+    : symbol(u' '), foregroundColor(Colors::BLACK), backgroundColor(Colors::WHITE) {};
+
 
 OneSymbol::OneSymbol(const char Symbol, const Color & ForegroundColor, const Color & BackgroundColor)
     : symbol(Symbol), foregroundColor(ForegroundColor), backgroundColor(BackgroundColor) {};
