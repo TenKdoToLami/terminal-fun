@@ -27,7 +27,7 @@ void TerminalControl::setTerminalSize()
 {
 	terminalGrid.resize(height);
 
-	for (int i = 0; i < height; i++)
+	for (size_t i = 0; i < height; i++)
 		terminalGrid[i].resize(width);
 
 	return;
