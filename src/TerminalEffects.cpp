@@ -1,7 +1,7 @@
 #include "TerminalEffects.h"
 
 
-void TerminalEffects::changeColorEffect(std::vector<std::vector<OneSymbol>> & terminalGrid, const Color & newColor) 
+void TerminalEffects::changeColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor) 
 {
     for (auto& row : terminalGrid)
         for (auto& symbol : row)
@@ -9,7 +9,7 @@ void TerminalEffects::changeColorEffect(std::vector<std::vector<OneSymbol>> & te
 }
 
 
-void TerminalEffects::invertColorEffect(std::vector<std::vector<OneSymbol>> & terminalGrid) 
+void TerminalEffects::invertColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid)
 {
     for (auto& row : terminalGrid)
         for (auto& symbol : row)

@@ -18,7 +18,8 @@ namespace TerminalEffects
     /**
      * @brief Changes the color of all symbols in the terminal grid.
      * 
-     * @param grid The terminal grid to modify.
+     * @param terminalGrid The terminal grid to modify.
+     * @param newColor The Color to change terminalGrid to.
      */
     void changeColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor);
 
@@ -26,7 +27,7 @@ namespace TerminalEffects
     /**
      * @brief Inverts all symbols in the terminal grid.
      *  
-     * @param grid The terminal grid to modify.
+     * @param terminalGrid The terminal grid to modify.
      */
     void invertColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid);
 }

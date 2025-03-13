@@ -1,6 +1,6 @@
 #pragma once
 /**
- * @file color.h
+ * @file Color.h
  * @brief Defines the Color struct and a set of predefined colors.
  *
  * This file provides a simple Color struct with red, green, and blue components.
