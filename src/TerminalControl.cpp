@@ -1,6 +1,33 @@
 #include "TerminalControl.h"
 
 
+TerminalControl::TerminalControl()
+{
+	// Disable cursor visibility
+	std::cout << "\033[?25l";
+	std::cout.flush();
+
+	// Disable input character echoing
+	struct termios tty;
+	tcgetattr(STDIN_FILENO, &tty);
+	tty.c_lflag &= tcflag_t(~ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
+}
+
+
+TerminalControl::~TerminalControl()
+{
+	// Re-enable cursor visibility
+	std::cout << "\033[?25h";
+	std::cout.flush();
+
+	// Restore input character echoing
+	struct termios tty;
+	tcgetattr(STDIN_FILENO, &tty);
+	tty.c_lflag |= ECHO;
+	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
+}
+
 void TerminalControl::getTerminalSize()
 {
 	struct winsize w;

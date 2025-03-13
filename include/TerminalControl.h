@@ -4,12 +4,13 @@
  */
 
 
- #pragma once
+#pragma once
 
 
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <iostream>
+#include <termios.h>
 
 
 #include "OneSymbol.h"
@@ -25,6 +26,22 @@
 class TerminalControl
 {
 public:
+    /**
+     * @brief Constructor that sets up the terminal environment.
+     *
+     * This constructor disables cursor visibility and prevents input characters
+     * from being echoed to the terminal.
+     */
+    TerminalControl();
+
+    /**
+     * @brief Destructor that restores the terminal settings.
+     *
+     * This destructor ensures the cursor is re-enabled and input character echoing
+     * is restored when the object goes out of scope.
+     */
+    ~TerminalControl();
+
     /**
      * @brief Retrieves the current terminal size.
      *
