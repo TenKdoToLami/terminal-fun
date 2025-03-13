@@ -77,6 +77,25 @@ struct Color
      */
     void setBlue(double value);
 
+    /**
+     * @brief Inverts the red component.
+     */
+    void invertRed();
+
+    /**
+     * @brief Inverts the green component.
+     */
+    void invertGreen();
+
+    /**
+     * @brief Inverts the blue component.
+     */
+    void invertBlue();
+
+    /**
+     * @brief Inverts all color components.
+     */
+    void invertColor();
 
 
 private:

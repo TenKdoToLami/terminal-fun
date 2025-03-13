@@ -22,17 +22,58 @@ int Color::getGreen() const
 void Color::setRed(double value)
 {
     red = std::clamp(value, 0.0, 255.0);
+
+    return;
 }
 
 
 void Color::setGreen(double value)
 {
     green = std::clamp(value, 0.0, 255.0);
+
+    return;
 }
+
 
 void Color::setBlue(double value)
 {
     blue = std::clamp(value, 0.0, 255.0);
+
+    return;
+}
+
+
+void Color::invertRed()
+{
+    red = std::max(0.0,255.0 - red);
+
+    return;
+}
+
+
+void Color::invertGreen()
+{
+    green = std::max(0.0, 255.0 - green);
+
+    return;
+}
+
+
+void Color::invertBlue()
+{
+    blue = std::max(0.0, 255.0 - blue);
+
+    return;
+}
+
+
+void Color::invertColor()
+{ 
+    invertRed();
+    invertGreen();
+    invertBlue(); 
+
+    return;
 }
 
 
