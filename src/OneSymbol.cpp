@@ -22,5 +22,5 @@ std::ostream &operator<<(std::ostream &os, const OneSymbol & oneSymbol)
         << symbol
         << "\033[0m";
         
-       return os;
+    return os;
 }

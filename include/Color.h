@@ -12,7 +12,6 @@
 #include <cmath>
 #include <algorithm>
 
-
 /**
  * @brief Represents an RGB color.
  *
@@ -21,6 +20,8 @@
  */
 struct Color
 {
+
+    
     /**
      * @brief Constructs a Color with specified RGB values.
      *

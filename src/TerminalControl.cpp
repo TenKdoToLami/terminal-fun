@@ -32,3 +32,14 @@ void TerminalControl::setTerminalSize()
 
 	return;
 }
+
+
+void TerminalControl::printTerminal() const
+{
+	for (size_t i = 0; i < terminalGrid.size(); i++)
+		for (size_t ii = 0; ii < terminalGrid.front().size(); ii++)
+			std::cout << terminalGrid[i][ii];
+	std::cout.flush();
+
+	return;
+}

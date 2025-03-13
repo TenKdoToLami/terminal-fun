@@ -1,4 +1,10 @@
-#pragma once
+/**
+ * @file TerminalControl.h
+ * @brief Terminal control utilities for handling terminal size and output.
+ */
+
+
+ #pragma once
 
 
 #include <sys/ioctl.h>
@@ -8,6 +14,14 @@
 
 #include "OneSymbol.h"
 
+
+/**
+ * @class TerminalControl
+ * @brief A class to manage terminal size and output.
+ *
+ * This class provides functionalities to retrieve the terminal size,
+ * clear the terminal screen, resize the terminal grid, and print its contents.
+ */
 class TerminalControl
 {
 public:
@@ -43,6 +57,16 @@ public:
     * @note Assumes `height` and `width` must be already set.
     */
     void setTerminalSize();
+
+
+    /**
+     * @brief Prints the terminal grid content to the output.
+     *
+     * This function iterates over the `terminalGrid` and prints each element
+     * to the standard output.
+    */
+    void printTerminal() const;
+
 
 private:
     size_t width;           ///< Width of the terminal in columns.
