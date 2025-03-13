@@ -25,9 +25,9 @@ struct Color
     /**
      * @brief Constructs a Color with specified RGB values.
      *
-     * @param r Red component (0-255)
-     * @param g Green component (0-255)
-     * @param b Blue component (0-255)
+     * @param Red Red component (0-255)
+     * @param Green Green component (0-255)
+     * @param Blue Blue component (0-255)
      */
     constexpr Color(double Red, double Green, double Blue) : red(Red), green(Green), blue(Blue) {};
 
@@ -54,6 +54,30 @@ struct Color
      * @return int Rounded and clamped blue value.
      */
     int getBlue() const;
+
+
+    /**
+     * @brief Sets the red component.
+     *
+     * @param value New red value (0-255)
+     */
+    void setRed(double value);
+
+    /**
+     * @brief Sets the green component.
+     *
+     * @param value New green value (0-255)
+     */
+    void setGreen(double value);
+
+    /**
+     * @brief Sets the blue component.
+     *
+     * @param value New blue value (0-255)
+     */
+    void setBlue(double value);
+
+
 
 private:
     double red;   ///< Red component (0-255)

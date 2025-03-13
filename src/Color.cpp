@@ -19,6 +19,23 @@ int Color::getGreen() const
 }
 
 
+void Color::setRed(double value)
+{
+    red = std::clamp(value, 0.0, 255.0);
+}
+
+
+void Color::setGreen(double value)
+{
+    green = std::clamp(value, 0.0, 255.0);
+}
+
+void Color::setBlue(double value)
+{
+    blue = std::clamp(value, 0.0, 255.0);
+}
+
+
 namespace Colors
 {
     const Color RED(255, 0, 0);
