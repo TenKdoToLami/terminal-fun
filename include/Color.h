@@ -57,11 +57,29 @@ struct Color
 
 
     /**
+     * @brief Set a Color with specified RGB values.
+     *
+     * @param newColor Color(Red component (0-255), Green component (0-255), Blue component (0-255))
+     */
+    void setColor(Color newColor);
+
+
+    /**
+     * @brief Set a Color with specified RGB values.
+     *
+     * @param Red Red component (0-255)
+     * @param Green Green component (0-255)
+     * @param Blue Blue component (0-255)
+     */
+    void setColor(double Red, double Green, double Blue);
+
+    /**
      * @brief Sets the red component.
      *
      * @param value New red value (0-255)
      */
     void setRed(double value);
+
 
     /**
      * @brief Sets the green component.
@@ -70,6 +88,7 @@ struct Color
      */
     void setGreen(double value);
 
+
     /**
      * @brief Sets the blue component.
      *
@@ -77,20 +96,24 @@ struct Color
      */
     void setBlue(double value);
 
+
     /**
      * @brief Inverts the red component.
      */
     void invertRed();
+
 
     /**
      * @brief Inverts the green component.
      */
     void invertGreen();
 
+
     /**
      * @brief Inverts the blue component.
      */
     void invertBlue();
+
 
     /**
      * @brief Inverts all color components.
