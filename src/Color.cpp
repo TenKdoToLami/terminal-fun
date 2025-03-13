@@ -28,6 +28,7 @@ void Color::setColor(Color newColor)
     return;
 }
 
+
 void Color::setColor(double Red, double Green, double Blue)
 {
     red = std::clamp(red, 0.0, 255.0);
@@ -36,6 +37,7 @@ void Color::setColor(double Red, double Green, double Blue)
 
     return;
 }
+
 
 void Color::setRed(double value)
 {
@@ -90,6 +92,40 @@ void Color::invertColor()
     invertRed();
     invertGreen();
     invertBlue(); 
+
+    return;
+}
+
+
+void Color::modifyRed(double coefficient) 
+{
+    red = std::clamp(red * coefficient, 0.0, 255.0);
+
+    return;
+}
+
+
+void Color::modifyGreen(double coefficient) 
+{
+    green = std::clamp(green * coefficient, 0.0, 255.0);
+
+    return;
+}
+
+
+void Color::modifyBlue(double coefficient) 
+{
+    blue = std::clamp(blue * coefficient, 0.0, 255.0);
+
+    return;
+}
+
+
+void Color::modifyColor(double coefficient) 
+{
+    modifyRed(coefficient);
+    modifyGreen(coefficient);
+    modifyBlue(coefficient);
 
     return;
 }

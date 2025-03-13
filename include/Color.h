@@ -121,6 +121,34 @@ struct Color
     void invertColor();
 
 
+    /**
+     * @brief Modifies the red component by a given coefficient.
+     * @param coefficient Value to adjust the red component.
+     */
+    void modifyRed(double coefficient);
+
+
+    /**
+     * @brief Modifies the green component by a given coefficient.
+     * @param coefficient Value to adjust the green component.
+     */
+    void modifyGreen(double coefficient);
+
+
+    /**
+     * @brief Modifies the blue component by a given coefficient.
+     * @param coefficient Value to adjust the blue component.
+     */
+    void modifyBlue(double coefficient);
+
+
+    /**
+     * @brief Modifies all color components by a given coefficient.
+     * @param coefficient Value to adjust all components.
+     */
+    void modifyColor(double coefficient);
+
+
 private:
     double red;   ///< Red component (0-255)
     double green; ///< Green component (0-255)
