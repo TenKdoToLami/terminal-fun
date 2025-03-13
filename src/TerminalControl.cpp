@@ -28,6 +28,13 @@ TerminalControl::~TerminalControl()
 	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 }
 
+
+TerminalControl::operator std::vector <std::vector<OneSymbol> > & ()
+{
+	return terminalGrid;
+}
+
+
 void TerminalControl::getTerminalSize()
 {
 	struct winsize w;

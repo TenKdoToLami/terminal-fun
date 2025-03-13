@@ -42,6 +42,18 @@ public:
      */
     ~TerminalControl();
 
+
+    /**
+    * @brief Conversion operator to retrieve the terminal grid.
+    *
+    * This operator allows an instance of TerminalControl to be implicitly converted 
+    * into a reference to a 2D vector of OneSymbol objects, representing the terminal's grid.
+    * 
+    * @return std::vector<std::vector<OneSymbol>>& A reference to the terminal grid.
+    */
+    operator std::vector < std::vector < OneSymbol > > & ();
+
+
     /**
      * @brief Retrieves the current terminal size.
      *
