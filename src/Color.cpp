@@ -31,9 +31,9 @@ void Color::setColor(Color newColor)
 
 void Color::setColor(double Red, double Green, double Blue)
 {
-    red = std::clamp(red, 0.0, 255.0);
-    blue = std::clamp(blue, 0.0, 255.0);
-    green = std::clamp(green, 0.0, 255.0);
+    red = std::clamp(Red, 0.0, 255.0);
+    blue = std::clamp(Blue, 0.0, 255.0);
+    green = std::clamp(Green, 0.0, 255.0);
 
     return;
 }
