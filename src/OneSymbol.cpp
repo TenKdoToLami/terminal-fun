@@ -12,6 +12,15 @@ OneSymbol::OneSymbol(const Color & ForegroundColor, const Color & BackgroundColo
     : symbol(u' '), foregroundColor(ForegroundColor), backgroundColor(BackgroundColor) {}
 
 
+void OneSymbol::invertColor()
+{
+    backgroundColor.invertColor();
+    foregroundColor.invertColor();
+
+    return;
+}
+
+
 std::ostream &operator<<(std::ostream &os, const OneSymbol & oneSymbol)
 {
     const auto & [symbol,foregroundColor,backgroundColor] = oneSymbol;

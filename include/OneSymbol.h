@@ -47,7 +47,16 @@ public:
      */
     OneSymbol(const Color & ForegroundColor, const Color & BackgroundColor);
 
-    
+
+    /**
+     * @brief Inverts the foreground and background colors of the symbol.
+     *
+     * This function inverts the foreground and background colors of the `OneSymbol` object 
+     * by calling their respective `invertColor` methods.
+     */
+    void invertColor();
+
+
     /**
      * @brief Overloads the output stream operator to display a OneSymbol object.
      *
