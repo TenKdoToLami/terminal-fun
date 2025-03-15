@@ -6,8 +6,6 @@
 #include "OneSymbol.h"
 
 
-using TerminalEffect = std::function <void (std::vector < std::vector <OneSymbol> > &)>;
-
 
 /**
  * @namespace TerminalEffects
@@ -16,12 +14,34 @@ using TerminalEffect = std::function <void (std::vector < std::vector <OneSymbol
 namespace TerminalEffects 
 {
     /**
+     * @brief Changes the color of background in the terminal grid.
+     * 
+     * @param terminalGrid The terminal grid to modify.
+     * @param newColor The Color to change the background of terminalGrid to.
+     */
+    void changeBackgroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor);
+
+
+    /**
      * @brief Changes the color of all symbols in the terminal grid.
      * 
      * @param terminalGrid The terminal grid to modify.
-     * @param newColor The Color to change terminalGrid to.
+     * @param newColor The Color to change the symbols of terminalGrid to.
      */
-    void changeColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor);
+    void changeForegroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor);
+
+
+    /**
+     * @brief Changes the symbols in the terminal grid.
+     * 
+     * @param terminalGrid The terminal grid to modify.
+     * @param newSymbolk The symbol to change terminalGrid to.
+     */
+    void changeSymbolEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const char newSymbol);
+
+
+
+
 
 
     /**

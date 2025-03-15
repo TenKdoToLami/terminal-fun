@@ -1,17 +1,40 @@
 #include "TerminalEffects.h"
 
 
-void TerminalEffects::changeColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor) 
+void TerminalEffects::changeBackgroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor) 
 {
-    for (auto& row : terminalGrid)
-        for (auto& symbol : row)
+    for (auto & row : terminalGrid)
+        for (auto & symbol : row)
             symbol.backgroundColor.setColor(newColor);
+
+    return;
 }
 
 
-void TerminalEffects::invertColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid)
+void TerminalEffects::changeForegroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor) 
+{
+    for (auto & row : terminalGrid)
+        for (auto & symbol : row)
+            symbol.foregroundColor.setColor(newColor);
+
+    return;
+}
+
+
+void TerminalEffects::changeSymbolEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const char newSymbol)
+{
+    for (auto & row : terminalGrid)
+        for (auto & symbol : row)
+            symbol.symbol = newSymbol;
+
+    return;
+}
+
+void TerminalEffects::invertColorEffect(std::vector<std::vector<OneSymbol>> &terminalGrid)
 {
     for (auto& row : terminalGrid)
         for (auto& symbol : row)
-            symbol.backgroundColor.invertColor();
+            symbol.invertColor();
+    
+    return;
 }
