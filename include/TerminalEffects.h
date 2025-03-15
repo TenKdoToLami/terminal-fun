@@ -14,28 +14,37 @@
 namespace TerminalEffects 
 {
     /**
-     * @brief Changes the color of background in the terminal grid.
+     * @brief Changes the background color of all symbols in the terminal grid.
+     * 
+     * This function iterates through the `terminalGrid` and updates the background 
+     * color of each symbol to the specified `newColor`.
      * 
      * @param terminalGrid The terminal grid to modify.
-     * @param newColor The Color to change the background of terminalGrid to.
+     * @param newColor The new background color to apply.
      */
     void changeBackgroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor);
 
 
     /**
-     * @brief Changes the color of all symbols in the terminal grid.
+     * @brief Changes the foreground color of all symbols in the terminal grid.
+     * 
+     * This function updates the foreground color of each symbol in the `terminalGrid` 
+     * to the specified `newColor`.
      * 
      * @param terminalGrid The terminal grid to modify.
-     * @param newColor The Color to change the symbols of terminalGrid to.
+     * @param newColor The new foreground color to apply.
      */
     void changeForegroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor);
 
 
     /**
-     * @brief Changes the symbols in the terminal grid.
+     * @brief Changes the symbol character of all symbols in the terminal grid.
+     * 
+     * This function replaces the character of each symbol in the `terminalGrid` 
+     * with the specified `newSymbol`.
      * 
      * @param terminalGrid The terminal grid to modify.
-     * @param newSymbolk The symbol to change terminalGrid to.
+     * @param newSymbol The new symbol character to apply.
      */
     void changeSymbolEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const char newSymbol);
 

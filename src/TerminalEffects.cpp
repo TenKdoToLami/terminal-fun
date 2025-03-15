@@ -39,7 +39,7 @@ void TerminalEffects::changeTerminalTo(std::vector<std::vector<OneSymbol>> &term
             symbol.backgroundColor.setColor(newBackgroundColor);
             symbol.symbol = newSymbol;
         }
-        
+
     return;
 }
 
