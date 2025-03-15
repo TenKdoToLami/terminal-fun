@@ -30,6 +30,19 @@ void TerminalEffects::changeSymbolEffect(std::vector < std::vector <OneSymbol> >
     return;
 }
 
+void TerminalEffects::changeTerminalTo(std::vector<std::vector<OneSymbol>> &terminalGrid, const char newSymbol, const Color &newForegroundColor, const Color &newBackgroundColor)
+{
+    for (auto & row : terminalGrid)
+        for (auto & symbol : row)
+        {
+            symbol.foregroundColor.setColor(newForegroundColor);
+            symbol.backgroundColor.setColor(newBackgroundColor);
+            symbol.symbol = newSymbol;
+        }
+        
+    return;
+}
+
 void TerminalEffects::invertColorEffect(std::vector<std::vector<OneSymbol>> &terminalGrid)
 {
     for (auto& row : terminalGrid)

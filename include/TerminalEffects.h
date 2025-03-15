@@ -41,6 +41,7 @@ namespace TerminalEffects
 
 
 
+    void changeTerminalTo(std::vector < std::vector <OneSymbol> > & terminalGrid, const char newSymbol, const Color & newForegroundColor, const Color & newBackgroundColor);
 
 
 
