@@ -74,6 +74,39 @@ struct Color
 
 
     /**
+     * @brief Retrieves the red component as a double.
+     * 
+     * Returns the raw red component value without clamping or rounding.
+     * This allows precise operations without integer constraints.
+     * 
+     * @return double The red component value.
+     */
+    double getR() const;
+
+
+    /**
+     * @brief Retrieves the blue component as a double.
+     * 
+     * Returns the raw blue component value without clamping or rounding.
+     * This allows precise operations without integer constraints.
+     * 
+     * @return double The blue component value.
+     */
+    double getB() const;
+
+
+    /**
+     * @brief Retrieves the green component as a double.
+     * 
+     * Returns the raw green component value without clamping or rounding.
+     * This allows precise operations without integer constraints.
+     * 
+     * @return double The green component value.
+     */
+    double getG() const;
+
+    
+    /**
      * @brief Set a Color with specified RGB values.
      *
      * @param newColor Color(Red component (0-255), Green component (0-255), Blue component (0-255))

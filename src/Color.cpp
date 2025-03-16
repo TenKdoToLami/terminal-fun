@@ -33,6 +33,25 @@ int Color::getGreen() const
 }
 
 
+double Color::getR() const
+{
+    return red;
+}
+
+
+double Color::getG() const
+{
+    return green;
+}
+
+
+double Color::getB() const
+{
+    return blue;
+}
+
+
+
 void Color::setColor(const Color newColor)
 {
     red = newColor.getRed();
