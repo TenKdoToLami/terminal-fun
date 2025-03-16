@@ -61,7 +61,7 @@ struct Color
      *
      * @param newColor Color(Red component (0-255), Green component (0-255), Blue component (0-255))
      */
-    void setColor(Color newColor);
+    void setColor(const Color newColor);
 
 
     /**
@@ -71,14 +71,14 @@ struct Color
      * @param Green Green component (0-255)
      * @param Blue Blue component (0-255)
      */
-    void setColor(double Red, double Green, double Blue);
+    void setColor(const double Red, const double Green, const double Blue);
 
     /**
      * @brief Sets the red component.
      *
      * @param value New red value (0-255)
      */
-    void setRed(double value);
+    void setRed(const double value);
 
 
     /**
@@ -86,7 +86,7 @@ struct Color
      *
      * @param value New green value (0-255)
      */
-    void setGreen(double value);
+    void setGreen(const double value);
 
 
     /**
@@ -94,7 +94,7 @@ struct Color
      *
      * @param value New blue value (0-255)
      */
-    void setBlue(double value);
+    void setBlue(const double value);
 
 
     /**
@@ -130,6 +130,7 @@ struct Color
      */
     void scaleRed(const double coefficient);
 
+
     /**
      * @brief Scales the green component by a given coefficient.
      * 
@@ -139,6 +140,7 @@ struct Color
      */
     void scaleGreen(const double coefficient);
 
+
     /**
      * @brief Scales the blue component by a given coefficient.
      * 
@@ -147,6 +149,7 @@ struct Color
      * @param coefficient The factor by which the blue component is scaled.
      */
     void scaleBlue(const double coefficient);
+
 
     /**
      * @brief Scales all color components by a given coefficient.

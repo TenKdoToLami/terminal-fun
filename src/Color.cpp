@@ -19,7 +19,7 @@ int Color::getGreen() const
 }
 
 
-void Color::setColor(Color newColor)
+void Color::setColor(const Color newColor)
 {
     red = newColor.getRed();
     green = newColor.getGreen();
@@ -29,7 +29,7 @@ void Color::setColor(Color newColor)
 }
 
 
-void Color::setColor(double Red, double Green, double Blue)
+void Color::setColor(const double Red, const double Green, const double Blue)
 {
     red = std::clamp(Red, 0.0, 255.0);
     blue = std::clamp(Blue, 0.0, 255.0);
@@ -39,7 +39,7 @@ void Color::setColor(double Red, double Green, double Blue)
 }
 
 
-void Color::setRed(double value)
+void Color::setRed(const double value)
 {
     red = std::clamp(value, 0.0, 255.0);
 
@@ -47,7 +47,7 @@ void Color::setRed(double value)
 }
 
 
-void Color::setGreen(double value)
+void Color::setGreen(const double value)
 {
     green = std::clamp(value, 0.0, 255.0);
 
@@ -55,7 +55,7 @@ void Color::setGreen(double value)
 }
 
 
-void Color::setBlue(double value)
+void Color::setBlue(const double value)
 {
     blue = std::clamp(value, 0.0, 255.0);
 
