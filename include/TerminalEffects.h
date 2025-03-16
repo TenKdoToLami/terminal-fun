@@ -72,6 +72,16 @@ namespace TerminalEffects
     void invertColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid);
 
 
-
-    void adjustColorByIncremenEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const double increment, bool backgroundColor = true);
+    /**
+     * @brief Adjusts the brightness of the terminal grid's colors by a given increment.
+     * 
+     * Modifies the foreground and background color of all symbols in the terminal grid 
+     * by increasing or decreasing each color component by a specified increment.
+     * The adjustment is applied uniformly across the grid.
+     * 
+     * @param terminalGrid The terminal grid to modify.
+     * @param increment The value by which to increase or decrease each color component. 
+     *                  Positive values brighten the color, while negative values darken it.
+     */
+    void adjustBrightnessByIncrementEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const double increment);
 }

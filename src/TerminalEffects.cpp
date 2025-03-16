@@ -52,15 +52,14 @@ void TerminalEffects::invertColorEffect(std::vector<std::vector<OneSymbol>> &ter
     return;
 }
 
-void TerminalEffects::adjustColorByIncremenEffect(std::vector<std::vector<OneSymbol>> &terminalGrid, const double increment, bool backgroundColor)
+void TerminalEffects::adjustBrightnessByIncrementEffect(std::vector<std::vector<OneSymbol>> &terminalGrid, const double increment)
 {
     for (auto & row : terminalGrid)
         for (auto & symbol : row)
-            if (backgroundColor)
+        {
                 symbol.backgroundColor.adjustColor(increment);
-            else
                 symbol.foregroundColor.adjustColor(increment);
-
+        }
     return;
 }
 
