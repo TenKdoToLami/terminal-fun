@@ -39,3 +39,4 @@ debug: CXXFLAGS += -g -O0 -fsanitize=address,undefined
 
 docs:
 	doxygen Doxyfile
+	@echo "Documentation available at file://$(abspath docs/html/index.html)"
