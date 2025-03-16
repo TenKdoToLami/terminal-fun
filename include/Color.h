@@ -186,11 +186,12 @@ struct Color
 
 
     /**
-     * @brief Scales all color components by a given coefficient.
+     * @brief Adjusts the brightness of the color by scaling all components.
      * 
-     * Multiplies the red, green, and blue components by the given coefficient, clamping each result within the valid range [0, 255].
+     * Multiplies the red, green, and blue components by the given coefficient, effectively making the color brighter (>1.0) or darker (<1.0).
+     * The result is clamped within the valid range [0, 255] to prevent overflow.
      * 
-     * @param coefficient The factor by which all components are scaled.
+     * @param coefficient The brightness scaling factor (e.g., 1.2 increases brightness, 0.8 decreases it).
      */
     void scaleColor(const double coefficient);
 
@@ -224,13 +225,13 @@ struct Color
      */
     void adjustBlue(const double increment);
 
-
     /**
-     * @brief Adjusts all color components by a given increment.
-     * 
-     * Adds the given increment to the red, green, and blue components, clamping each result within the valid range [0, 255].
-     * 
-     * @param increment The value to be added to all components.
+     * @brief Adjusts the brightness of the color by modifying all components.  
+     *  
+     * Increases or decreases the red, green, and blue components by the given increment, effectively making the color brighter (positive values) or darker (negative values).  
+     * The result is clamped within the valid range [0, 255] to prevent overflow.  
+     *  
+     * @param increment The value to be added to all components (e.g., +20 brightens the color, -20 darkens it).  
      */
     void adjustColor(const double increment);
 
