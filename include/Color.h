@@ -99,26 +99,43 @@ struct Color
 
     /**
      * @brief Inverts the red component.
+     * 
+     * Reverses the intensity of the red component by subtracting its current value from 255.
+     * This creates a complementary color effect, ensuring the red component moves toward the opposite end of the spectrum.
+     * The result is clamped within the valid range [0, 255].
      */
     void invertRed();
 
-
+    
     /**
      * @brief Inverts the green component.
+     * 
+     * Reverses the intensity of the green component by subtracting its current value from 255.
+     * This produces a complementary color effect, ensuring the green component moves toward the opposite end of the spectrum.
+     * The result is clamped within the valid range [0, 255].
      */
     void invertGreen();
 
 
     /**
      * @brief Inverts the blue component.
+     * 
+     * Reverses the intensity of the blue component by subtracting its current value from 255.
+     * This generates a complementary color effect, ensuring the blue component moves toward the opposite end of the spectrum.
+     * The result is clamped within the valid range [0, 255].
      */
     void invertBlue();
 
 
     /**
      * @brief Inverts all color components.
+     * 
+     * Applies the inversion operation to the red, green, and blue components.
+     * This results in a full-color inversion, producing a negative of the original color.
+     * It is equivalent to subtracting each color component from 255.
      */
     void invertColor();
+
 
 
     /**
