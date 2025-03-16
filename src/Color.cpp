@@ -1,5 +1,19 @@
 #include "Color.h"
 
+bool Color::operator==(const Color & other) const
+{
+    return 
+        getRed() == other.getRed() &&
+        getGreen() == other.getGreen() &&
+        getBlue() == other.getBlue();
+}
+
+
+bool Color::operator!=(const Color & other) const
+{
+    return !(*this == other);
+}
+
 
 int Color::getRed() const
 {
@@ -162,6 +176,13 @@ void Color::adjustColor(const double increment)
     adjustBlue(increment);
     
     return;
+}
+
+
+void Color::convertToGrayscale()
+{
+    double gray = (red + green + blue) / 3.0;
+    red = green = blue = gray;
 }
 
 

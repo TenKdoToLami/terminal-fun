@@ -33,6 +33,23 @@ struct Color
 
 
     /**
+     * @brief Checks if two colors are equal.
+     * 
+     * @param other The color to compare with.
+     * @return True if the colors are the same, false otherwise.
+     */
+    bool operator == (const Color & other) const;
+
+
+    /**
+     * @brief Checks if two colors are different.
+     * 
+     * @param other The color to compare with.
+     * @return True if the colors are different, false otherwise.
+     */
+    bool operator != (const Color & other) const;
+
+    /**
      * @brief Retrieves the red component as an integer (0-255).
      *
      * @return int Rounded and clamped red value.
@@ -217,7 +234,16 @@ struct Color
      */
     void adjustColor(const double increment);
 
-    
+
+    /**
+     * @brief Converts the color to grayscale.
+     * 
+     * This sets the red, green, and blue components to their average value,
+     * creating a neutral tone while maintaining brightness.
+     */
+    void convertToGrayscale();
+
+
 private:
     double red;   ///< Red component (0-255)
     double green; ///< Green component (0-255)
