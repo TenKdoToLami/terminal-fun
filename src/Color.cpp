@@ -164,6 +164,15 @@ void Color::scaleColor(const double coefficient)
 }
 
 
+void Color::scaleColor(const Color coefficient)
+{
+    scaleRed(coefficient.getR());
+    scaleGreen(coefficient.getGreen());
+    scaleBlue(coefficient.getB());
+
+    return;
+}
+
 void Color::adjustRed(const double increment) 
 {
     red = std::clamp(red + increment, 0.0, 255.0);
@@ -207,7 +216,7 @@ void Color::convertToGrayscale()
 }
 
 
-void Color::blendWith(const Color& other, double factor)
+void Color::blendWith(const Color & other, double factor)
 {
     factor = std::clamp(factor, 0.0, 1.0);
     red = std::clamp((1 - factor) * red + factor * other.red, 0.0, 255.0);

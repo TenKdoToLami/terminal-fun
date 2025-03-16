@@ -187,7 +187,6 @@ struct Color
     void invertColor();
 
 
-
     /**
      * @brief Scales the red component by a given coefficient.
      * 
@@ -227,6 +226,21 @@ struct Color
      * @param coefficient The brightness scaling factor (e.g., 1.2 increases brightness, 0.8 decreases it).
      */
     void scaleColor(const double coefficient);
+
+
+        /**
+     * @brief Scales each color component individually using a coefficient.
+     * 
+     * This method applies a per-channel scaling operation using the provided coefficient.
+     * Although the coefficient is passed as a `Color` object, it is used purely as a container 
+     * for three independent double values rather than as an actual color.
+     * 
+     * Each component (red, green, blue) is scaled by the corresponding value in the coefficient,
+     * and the result is clamped within the valid range [0, 255].
+     * 
+     * @param coefficient A `Color` object where each component acts as a scaling factor.
+     */
+    void scaleColor(const Color coefficient);
 
 
     /**
@@ -290,7 +304,7 @@ struct Color
      * @param other The other color to blend with.
      * @param factor Blend factor (0.0 = no change, 1.0 = full transition to other color).
      */
-    void blendWith(const Color& other, double factor = 0.5);
+    void blendWith(const Color & other, double factor = 0.5);
 
 
 private:
