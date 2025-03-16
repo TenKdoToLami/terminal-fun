@@ -1,4 +1,3 @@
-#pragma once
 /**
  * @file Color.h
  * @brief Defines the Color struct and a set of predefined colors.
@@ -7,6 +6,9 @@
  * It also defines a Colors namespace that contains commonly used colors categorized
  * by hue for easy reference.
  */
+
+
+#pragma once
 
 
 #include <cmath>

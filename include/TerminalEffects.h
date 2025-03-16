@@ -1,3 +1,12 @@
+/**
+ * @file TerminalEffects.h
+ * @brief Provides functions for modifying terminal grid effects, such as changing colors and symbols.
+ *
+ * This file contains various utility functions for manipulating the appearance of a terminal grid.
+ * These functions allow modification of foreground and background colors, symbols, and brightness.
+ */
+
+
 #pragma once
 
 

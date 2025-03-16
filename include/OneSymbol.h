@@ -1,3 +1,14 @@
+/**
+ * @file OneSymbol.h
+ * @brief Defines the OneSymbol class for handling symbols with colors.
+ *
+ * The OneSymbol class represents a Unicode character with associated
+ * foreground and background colors. It provides constructors for
+ * initialization and a method to invert colors. The class also supports
+ * output streaming for easy visualization.
+ */
+
+
 #pragma once
 
 
