@@ -167,7 +167,7 @@ void Color::scaleColor(const double coefficient)
 void Color::scaleColor(const Color coefficient)
 {
     scaleRed(coefficient.getR());
-    scaleGreen(coefficient.getGreen());
+    scaleGreen(coefficient.getG());
     scaleBlue(coefficient.getB());
 
     return;
@@ -206,6 +206,14 @@ void Color::adjustColor(const double increment)
     return;
 }
 
+void Color::adjustColor(const Color increment)
+{
+    adjustRed(increment.getR());
+    adjustGreen(increment.getG());
+    adjustBlue(increment.getB());
+    
+    return;
+}
 
 void Color::convertToGrayscale()
 {

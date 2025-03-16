@@ -228,7 +228,7 @@ struct Color
     void scaleColor(const double coefficient);
 
 
-        /**
+    /**
      * @brief Scales each color component individually using a coefficient.
      * 
      * This method applies a per-channel scaling operation using the provided coefficient.
@@ -281,6 +281,21 @@ struct Color
      * @param increment The value to be added to all components (e.g., +20 brightens the color, -20 darkens it).  
      */
     void adjustColor(const double increment);
+
+
+    /**
+     * @brief Adjusts each color component individually by an increment.
+     * 
+     * This method modifies the red, green, and blue components by adding the corresponding 
+     * values from the given increment. Although the increment is passed as a `Color` object, 
+     * it serves as a container for three independent double values rather than as an actual color.
+     * 
+     * Each component (red, green, blue) is adjusted by its respective value in the increment,
+     * and the result is clamped within the valid range [0, 255].
+     * 
+     * @param increment A `Color` object where each component acts as an additive offset.
+     */
+    void adjustColor(const Color increment);
 
 
     /**
