@@ -60,7 +60,7 @@ namespace TerminalEffects
      * @param newForegroundColor The new foreground color to apply.
      * @param newBackgroundColor The new background color to apply.
      */
-    void changeTerminalTo(std::vector < std::vector <OneSymbol> > & terminalGrid, const char newSymbol, const Color & newForegroundColor, const Color & newBackgroundColor);
+    void changeTerminalToEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const char newSymbol, const Color & newForegroundColor, const Color & newBackgroundColor);
 
 
 
@@ -70,4 +70,8 @@ namespace TerminalEffects
      * @param terminalGrid The terminal grid to modify.
      */
     void invertColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid);
+
+
+
+    void adjustColorByIncremenEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const double increment, bool backgroundColor = true);
 }

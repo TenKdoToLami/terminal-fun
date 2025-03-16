@@ -30,7 +30,7 @@ void TerminalEffects::changeSymbolEffect(std::vector < std::vector <OneSymbol> >
     return;
 }
 
-void TerminalEffects::changeTerminalTo(std::vector<std::vector<OneSymbol>> &terminalGrid, const char newSymbol, const Color &newForegroundColor, const Color &newBackgroundColor)
+void TerminalEffects::changeTerminalToEffect(std::vector<std::vector<OneSymbol>> &terminalGrid, const char newSymbol, const Color &newForegroundColor, const Color &newBackgroundColor)
 {
     for (auto & row : terminalGrid)
         for (auto & symbol : row)
@@ -45,9 +45,22 @@ void TerminalEffects::changeTerminalTo(std::vector<std::vector<OneSymbol>> &term
 
 void TerminalEffects::invertColorEffect(std::vector<std::vector<OneSymbol>> &terminalGrid)
 {
-    for (auto& row : terminalGrid)
-        for (auto& symbol : row)
+    for (auto & row : terminalGrid)
+        for (auto & symbol : row)
             symbol.invertColor();
     
     return;
 }
+
+void TerminalEffects::adjustColorByIncremenEffect(std::vector<std::vector<OneSymbol>> &terminalGrid, const double increment, bool backgroundColor)
+{
+    for (auto & row : terminalGrid)
+        for (auto & symbol : row)
+            if (backgroundColor)
+                symbol.backgroundColor.adjustColor(increment);
+            else
+                symbol.foregroundColor.adjustColor(increment);
+
+    return;
+}
+
