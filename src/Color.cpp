@@ -97,7 +97,7 @@ void Color::invertColor()
 }
 
 
-void Color::modifyRed(double coefficient) 
+void Color::scaleRed(const double coefficient) 
 {
     red = std::clamp(red * coefficient, 0.0, 255.0);
 
@@ -105,7 +105,7 @@ void Color::modifyRed(double coefficient)
 }
 
 
-void Color::modifyGreen(double coefficient) 
+void Color::scaleGreen(const double coefficient) 
 {
     green = std::clamp(green * coefficient, 0.0, 255.0);
 
@@ -113,7 +113,7 @@ void Color::modifyGreen(double coefficient)
 }
 
 
-void Color::modifyBlue(double coefficient) 
+void Color::scaleBlue(const double coefficient) 
 {
     blue = std::clamp(blue * coefficient, 0.0, 255.0);
 
@@ -121,11 +121,11 @@ void Color::modifyBlue(double coefficient)
 }
 
 
-void Color::modifyColor(double coefficient) 
+void Color::scaleColor(const double coefficient) 
 {
-    modifyRed(coefficient);
-    modifyGreen(coefficient);
-    modifyBlue(coefficient);
+    scaleRed(coefficient);
+    scaleGreen(coefficient);
+    scaleBlue(coefficient);
 
     return;
 }

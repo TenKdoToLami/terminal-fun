@@ -122,31 +122,40 @@ struct Color
 
 
     /**
-     * @brief Modifies the red component by a given coefficient.
-     * @param coefficient Value to adjust the red component.
+     * @brief Scales the red component by a given coefficient.
+     * 
+     * Multiplies the red component by the given coefficient, clamping the result within the valid range [0, 255].
+     * 
+     * @param coefficient The factor by which the red component is scaled.
      */
-    void modifyRed(double coefficient);
-
+    void scaleRed(const double coefficient);
 
     /**
-     * @brief Modifies the green component by a given coefficient.
-     * @param coefficient Value to adjust the green component.
+     * @brief Scales the green component by a given coefficient.
+     * 
+     * Multiplies the green component by the given coefficient, clamping the result within the valid range [0, 255].
+     * 
+     * @param coefficient The factor by which the green component is scaled.
      */
-    void modifyGreen(double coefficient);
-
+    void scaleGreen(const double coefficient);
 
     /**
-     * @brief Modifies the blue component by a given coefficient.
-     * @param coefficient Value to adjust the blue component.
+     * @brief Scales the blue component by a given coefficient.
+     * 
+     * Multiplies the blue component by the given coefficient, clamping the result within the valid range [0, 255].
+     * 
+     * @param coefficient The factor by which the blue component is scaled.
      */
-    void modifyBlue(double coefficient);
-
+    void scaleBlue(const double coefficient);
 
     /**
-     * @brief Modifies all color components by a given coefficient.
-     * @param coefficient Value to adjust all components.
+     * @brief Scales all color components by a given coefficient.
+     * 
+     * Multiplies the red, green, and blue components by the given coefficient, clamping each result within the valid range [0, 255].
+     * 
+     * @param coefficient The factor by which all components are scaled.
      */
-    void modifyColor(double coefficient);
+    void scaleColor(const double coefficient);
 
 
 private:
