@@ -131,6 +131,40 @@ void Color::scaleColor(const double coefficient)
 }
 
 
+void Color::adjustRed(const double increment) 
+{
+    red = std::clamp(red + increment, 0.0, 255.0);
+
+    return;
+}
+
+
+void Color::adjustGreen(const double increment) 
+{
+    green = std::clamp(green + increment, 0.0, 255.0);
+
+    return;
+}
+
+
+void Color::adjustBlue(const double increment) 
+{
+    blue = std::clamp(blue + increment, 0.0, 255.0);
+
+    return;
+}
+
+
+void Color::adjustColor(const double increment) 
+{
+    adjustRed(increment);
+    adjustGreen(increment);
+    adjustBlue(increment);
+    
+    return;
+}
+
+
 namespace Colors
 {
     const Color RED(255, 0, 0);

@@ -178,6 +178,46 @@ struct Color
     void scaleColor(const double coefficient);
 
 
+    /**
+     * @brief Adjusts the red component by a given increment.
+     * 
+     * Adds the given increment to the red component, clamping the result within the valid range [0, 255].
+     * 
+     * @param increment The value to be added to the red component.
+     */
+    void adjustRed(const double increment);
+
+
+    /**
+     * @brief Adjusts the green component by a given increment.
+     * 
+     * Adds the given increment to the green component, clamping the result within the valid range [0, 255].
+     * 
+     * @param increment The value to be added to the green component.
+     */
+    void adjustGreen(const double increment);
+
+
+    /**
+     * @brief Adjusts the blue component by a given increment.
+     * 
+     * Adds the given increment to the blue component, clamping the result within the valid range [0, 255].
+     * 
+     * @param increment The value to be added to the blue component.
+     */
+    void adjustBlue(const double increment);
+
+
+    /**
+     * @brief Adjusts all color components by a given increment.
+     * 
+     * Adds the given increment to the red, green, and blue components, clamping each result within the valid range [0, 255].
+     * 
+     * @param increment The value to be added to all components.
+     */
+    void adjustColor(const double increment);
+
+    
 private:
     double red;   ///< Red component (0-255)
     double green; ///< Green component (0-255)
