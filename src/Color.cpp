@@ -202,8 +202,20 @@ void Color::convertToGrayscale()
 {
     double gray = (red + green + blue) / 3.0;
     red = green = blue = gray;
+
+    return;
 }
 
+
+void Color::blendWith(const Color& other, double factor)
+{
+    factor = std::clamp(factor, 0.0, 1.0);
+    red = std::clamp((1 - factor) * red + factor * other.red, 0.0, 255.0);
+    green = std::clamp((1 - factor) * green + factor * other.green, 0.0, 255.0);
+    blue = std::clamp((1 - factor) * blue + factor * other.blue, 0.0, 255.0);
+
+    return;
+}
 
 namespace Colors
 {

@@ -105,7 +105,7 @@ struct Color
      */
     double getG() const;
 
-    
+
     /**
      * @brief Set a Color with specified RGB values.
      *
@@ -276,6 +276,21 @@ struct Color
      * creating a neutral tone while maintaining brightness.
      */
     void convertToGrayscale();
+
+
+    /**
+     * @brief Blends the current color with another color.
+     * 
+     * Performs linear interpolation between this color and another,
+     * adjusting each RGB component based on the given blend factor.
+     * A factor of 0.0 keeps the original color, while a factor of 1.0 
+     * fully replaces it with the other color. Values in between create 
+     * a smooth transition.
+     * 
+     * @param other The other color to blend with.
+     * @param factor Blend factor (0.0 = no change, 1.0 = full transition to other color).
+     */
+    void blendWith(const Color& other, double factor = 0.5);
 
 
 private:
