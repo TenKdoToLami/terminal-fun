@@ -80,3 +80,28 @@ void TerminalControl::printTerminal() const
 
 	return;
 }
+
+
+void TerminalControl::setUpScaledGrid()
+{
+	getTerminalSize();
+	setTerminalSize();
+
+	size_t activeHeight = activeGrid.size();
+	size_t activeWidth = activeGrid.empty() ? 0 : activeGrid[0].size();
+
+	double rowScale = (double) activeHeight / (double) height;
+	double colScale = (double) activeWidth / (double) width;
+
+	for (size_t i = 0; i < height; i++)
+	{
+		size_t srcRow = (size_t) ((double) i * rowScale);
+		for (size_t j = 0; j < width; j++)
+		{
+			size_t srcCol = (size_t) ((double) j * colScale);
+			scaledGrid[i][j] = activeGrid[srcRow][srcCol];
+		}
+	}
+
+	return;
+}

@@ -76,6 +76,24 @@ public:
     void printTerminal() const;
 
 
+    /**
+     * @brief Adjusts the scaled grid to fit the current terminal size.
+     *
+     * This function retrieves the current terminal size, resizes `scaledGrid`
+     * accordingly, and scales `activeGrid` to fit within it.
+     *
+     * The scaling uses a nearest-neighbor approach:
+     * - If `activeGrid` is larger than `scaledGrid`, it shrinks by selecting the closest matching symbols.
+     * - If `activeGrid` is smaller, it expands by duplicating the nearest symbols.
+     *
+     * The function ensures that `scaledGrid` is properly populated, preventing
+     * out-of-bounds access when mapping between `activeGrid` and `scaledGrid`.
+     *
+     * @note Assumes `activeGrid` is non-empty.
+     */
+    void setUpScaledGrid();
+
+
 private:
     size_t width;           ///< Width of the terminal in columns.
     size_t height;          ///< Height of the terminal in rows.
