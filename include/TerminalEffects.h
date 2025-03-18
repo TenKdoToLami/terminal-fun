@@ -95,6 +95,15 @@ namespace TerminalEffects
     void adjustBrightnessByIncrementEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const double increment);
 
 
-
+    /**
+    * @brief Increments the foreground and background colors of all symbols in the terminal grid.
+    *
+    * This function iterates through the `terminalGrid` and adjusts the foreground and background
+    * colors of each symbol by the specified increments.
+    *
+    * @param terminalGrid The terminal grid to modify.
+    * @param foregroundColorIncrement The amount to increment the foreground color.
+    * @param backgroundColorIncrement The amount to increment the background color.
+    */
     void incrementColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color foregroundColorIncrement, const Color backgroundColorIncrement);
 }
