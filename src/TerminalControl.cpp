@@ -94,10 +94,10 @@ void TerminalControl::setUpScaledGrid(bool enforceEqualScale)
 	if (activeHeight == 0 || activeWidth == 0)
 		return;
 
-	double rowScale = (double) activeHeight / (double) height;
-	double colScale = (double) activeWidth / (double) width;
+	double rowScale = (double)activeHeight / (double)height;
+	double colScale = (double)activeWidth / (double)width;
 
-	// If enforcing equal scale, use the larger of the two
+	// Enforce equal scale if needed
 	if (enforceEqualScale)
 	{
 		double uniformScale = std::max(rowScale, colScale);
@@ -105,43 +105,42 @@ void TerminalControl::setUpScaledGrid(bool enforceEqualScale)
 		colScale = uniformScale;
 	}
 
-	// Lanczos kernel with parameter a = 3 (uses 3 pixels in each direction)
-	auto Lanczos = [](double x, int a = 3) -> double
-	{
-		if (x == 0.0) return 1.0;
-		if (x < -a || x > a) return 0.0;
-		double piX = M_PI * x;
-		return (a * sin(piX) * sin(piX / a)) / (piX * piX);
-	};
-
 	for (size_t i = 0; i < height; i++)
 	{
-		double srcRowF = (double) i * rowScale;
-		size_t srcRow = (size_t) srcRowF;
+		// Source row range
+		double srcRowStart = (double)i * rowScale;
+		double srcRowEnd = ((double)i + 1) * rowScale;
 
 		for (size_t j = 0; j < width; j++)
 		{
-			double srcColF = (double) j * colScale;
-			size_t srcCol = (size_t) srcColF;
+			// Source column range
+			double srcColStart = (double)j * colScale;
+			double srcColEnd = ((double)j + 1) * colScale;
 
 			double sumWeight = 0.0;
 			double red = 0.0, green = 0.0, blue = 0.0;
 
-			// Lanczos sampling over a 3x3 neighborhood
-			for (int m = -2; m <= 2; m++)
+			// Iterate over affected source pixels
+			size_t rowStart = (size_t)srcRowStart;
+			size_t rowEnd = std::min((size_t)srcRowEnd, activeHeight - 1);
+			size_t colStart = (size_t)srcColStart;
+			size_t colEnd = std::min((size_t)srcColEnd, activeWidth - 1);
+
+			for (size_t srcRow = rowStart; srcRow <= rowEnd; srcRow++)
 			{
-				for (int n = -2; n <= 2; n++)
+				for (size_t srcCol = colStart; srcCol <= colEnd; srcCol++)
 				{
-					int sampleRow = std::clamp<int>((int)srcRow + m, 0, (int)activeHeight - 1);
-					int sampleCol = std::clamp<int>((int)srcCol + n, 0, (int)activeWidth - 1);
+					// Compute overlapping area fraction
+					double rowOverlap = std::min(srcRowEnd, (double)srcRow + 1.0) - std::max(srcRowStart, (double)srcRow);
+					double colOverlap = std::min(srcColEnd, (double)srcCol + 1.0) - std::max(srcColStart, (double)srcCol);
+					double weight = rowOverlap * colOverlap;
 
-					double weight = Lanczos((double)m - (srcRowF - (double)srcRow)) * Lanczos((double)n - (srcColF - (double)srcCol));
-					sumWeight += weight;
-
-					OneSymbol &sample = activeGrid[(size_t)sampleRow][(size_t)sampleCol];
+					// Accumulate weighted colors
+					OneSymbol &sample = activeGrid[srcRow][srcCol];
 					red += sample.backgroundColor.getR() * weight;
 					green += sample.backgroundColor.getG() * weight;
 					blue += sample.backgroundColor.getB() * weight;
+					sumWeight += weight;
 				}
 			}
 
