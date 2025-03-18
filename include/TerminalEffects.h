@@ -93,4 +93,8 @@ namespace TerminalEffects
      *                  Positive values brighten the color, while negative values darken it.
      */
     void adjustBrightnessByIncrementEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const double increment);
+
+
+
+    void incrementColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color foregroundColorIncrement, const Color backgroundColorIncrement);
 }
