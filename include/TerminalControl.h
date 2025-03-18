@@ -27,12 +27,15 @@ class TerminalControl
 {
 public:
     /**
-     * @brief Constructor that sets up the terminal environment.
+     * @brief Constructor that sets up the terminal environment and initializes the active grid.
      *
-     * This constructor disables cursor visibility and prevents input characters
-     * from being echoed to the terminal.
+     * This constructor disables cursor visibility, prevents input characters
+     * from being echoed to the terminal, and resizes the active grid.
+     *
+     * @param Height The initial height of the active grid.
+     * @param Width The initial width of the active grid.
      */
-    TerminalControl();
+    TerminalControl(const size_t Height, const size_t Width);
 
     /**
      * @brief Destructor that restores the terminal settings.
@@ -44,26 +47,14 @@ public:
 
 
     /**
-    * @brief Conversion operator to retrieve the terminal grid.
+    * @brief Conversion operator to retrieve the active terminal grid.
     *
     * This operator allows an instance of TerminalControl to be implicitly converted 
-    * into a reference to a 2D vector of OneSymbol objects, representing the terminal's grid.
+    * into a reference to a 2D vector of OneSymbol objects, representing the active grid.
     * 
-    * @return std::vector<std::vector<OneSymbol>>& A reference to the terminal grid.
+    * @return std::vector<std::vector<OneSymbol>>& A reference to the active grid.
     */
     operator std::vector < std::vector < OneSymbol > > & ();
-
-
-    /**
-     * @brief Retrieves the current terminal size.
-     *
-     * This function queries the terminal for its current dimensions (columns and rows)
-     * and updates the `width` and `height` member variables accordingly.
-     *
-     * @note This function is platform-dependent and only works on terminals that
-     *       support the `TIOCGWINSZ` ioctl command (POSIX systems).
-     */
-    void getTerminalSize();
 
 
     /**
@@ -77,9 +68,26 @@ public:
 
 
     /**
-    * @brief Resizes the terminal grid to match the specified dimensions.
+     * @brief Prints the scaled terminal grid content to the output.
+     *
+     * This function iterates over `scaledGrid` and prints each element
+     * to the standard output.
+     */
+    void printTerminal() const;
+
+
+private:
+    size_t width;           ///< Width of the terminal in columns.
+    size_t height;          ///< Height of the terminal in rows.
+
+    std::vector < std::vector < OneSymbol > > activeGrid;  ///< The main grid being modified (Also referenced as terminalGrid)
+    std::vector < std::vector < OneSymbol > > scaledGrid;  ///< The scaled grid used for printing
+
+
+    /**
+    * @brief Resizes the scaled grid to match the specified dimensions.
     *
-    * This function adjusts the size of the `terminalGrid` to match the
+    * This function adjusts the size of `scaledGrid` to match the
     * current `height` and `width`. It ensures that each row is resized
     * correctly to maintain a consistent grid structure.
     *
@@ -89,17 +97,13 @@ public:
 
 
     /**
-     * @brief Prints the terminal grid content to the output.
+     * @brief Retrieves the current terminal size.
      *
-     * This function iterates over the `terminalGrid` and prints each element
-     * to the standard output.
-    */
-    void printTerminal() const;
-
-
-private:
-    size_t width;           ///< Width of the terminal in columns.
-    size_t height;          ///< Height of the terminal in rows.
-
-    std::vector < std::vector < OneSymbol > > terminalGrid;
+     * This function queries the terminal for its current dimensions (columns and rows)
+     * and updates the `width` and `height` member variables accordingly.
+     *
+     * @note This function is platform-dependent and only works on terminals that
+     *       support the `TIOCGWINSZ` ioctl command (POSIX systems).
+     */
+    void getTerminalSize();
 };

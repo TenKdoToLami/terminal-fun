@@ -1,8 +1,12 @@
 #include "TerminalControl.h"
 
 
-TerminalControl::TerminalControl()
+TerminalControl::TerminalControl(const size_t Height, const size_t Width)
 {
+	activeGrid.resize(Height);
+	for (size_t i = 0; i < Height; i++)
+		activeGrid[i].resize(Width);
+
 	// Disable cursor visibility
 	std::cout << "\033[?25l";
 	std::cout.flush();
@@ -31,7 +35,7 @@ TerminalControl::~TerminalControl()
 
 TerminalControl::operator std::vector <std::vector<OneSymbol> > & ()
 {
-	return terminalGrid;
+	return activeGrid;
 }
 
 
@@ -59,10 +63,9 @@ void TerminalControl::clearTerminal() const
 
 void TerminalControl::setTerminalSize()
 {
-	terminalGrid.resize(height);
-
+	scaledGrid.resize(height);
 	for (size_t i = 0; i < height; i++)
-		terminalGrid[i].resize(width);
+		scaledGrid[i].resize(width);
 
 	return;
 }
@@ -70,9 +73,9 @@ void TerminalControl::setTerminalSize()
 
 void TerminalControl::printTerminal() const
 {
-	for (size_t i = 0; i < terminalGrid.size(); i++)
-		for (size_t ii = 0; ii < terminalGrid.front().size(); ii++)
-			std::cout << terminalGrid[i][ii];
+	for (size_t i = 0; i < scaledGrid.size(); i++)
+		for (size_t ii = 0; ii < scaledGrid.front().size(); ii++)
+			std::cout << scaledGrid[i][ii];
 	std::cout.flush();
 
 	return;
