@@ -105,45 +105,58 @@ void TerminalControl::setUpScaledGrid(bool enforceEqualScale)
 		colScale = uniformScale;
 	}
 
+	// Lanczos kernel with parameter a = 3 (uses 3 pixels in each direction)
+	auto Lanczos = [](double x, int a = 3) -> double
+	{
+		if (x == 0.0) return 1.0;
+		if (x < -a || x > a) return 0.0;
+		double piX = M_PI * x;
+		return (a * sin(piX) * sin(piX / a)) / (piX * piX);
+	};
+
 	for (size_t i = 0; i < height; i++)
 	{
 		double srcRowF = (double) i * rowScale;
 		size_t srcRow = (size_t) srcRowF;
-		double rowFrac = srcRowF - (double) srcRow;
 
 		for (size_t j = 0; j < width; j++)
 		{
 			double srcColF = (double) j * colScale;
 			size_t srcCol = (size_t) srcColF;
-			double colFrac = srcColF - (double) srcCol;
 
-			// Get the four closest values
-			OneSymbol &topLeft = activeGrid[srcRow][srcCol];
-			OneSymbol &topRight = (srcCol + 1 < activeWidth) ? activeGrid[srcRow][srcCol + 1] : topLeft;
-			OneSymbol &bottomLeft = (srcRow + 1 < activeHeight) ? activeGrid[srcRow + 1][srcCol] : topLeft;
-			OneSymbol &bottomRight = (srcRow + 1 < activeHeight && srcCol + 1 < activeWidth) ? activeGrid[srcRow + 1][srcCol + 1] : topLeft;
+			double sumWeight = 0.0;
+			double red = 0.0, green = 0.0, blue = 0.0;
 
-			// Compute bilinear interpolation weights for each color channel
-			scaledGrid[i][j].backgroundColor.setRed(
-				topLeft.backgroundColor.getR() * (1 - rowFrac) * (1 - colFrac)
-				+ topRight.backgroundColor.getR() * (1 - rowFrac) * colFrac
-				+ bottomLeft.backgroundColor.getR() * rowFrac * (1 - colFrac)
-				+ bottomRight.backgroundColor.getR() * rowFrac * colFrac
-			);
-			
-			scaledGrid[i][j].backgroundColor.setGreen(
-				topLeft.backgroundColor.getG() * (1 - rowFrac) * (1 - colFrac)
-				+ topRight.backgroundColor.getG() * (1 - rowFrac) * colFrac
-				+ bottomLeft.backgroundColor.getG() * rowFrac * (1 - colFrac)
-				+ bottomRight.backgroundColor.getG() * rowFrac * colFrac
-			);
-			
-			scaledGrid[i][j].backgroundColor.setBlue(
-				topLeft.backgroundColor.getB() * (1 - rowFrac) * (1 - colFrac)
-				+ topRight.backgroundColor.getB() * (1 - rowFrac) * colFrac
-				+ bottomLeft.backgroundColor.getB() * rowFrac * (1 - colFrac)
-				+ bottomRight.backgroundColor.getB() * rowFrac * colFrac
-			);
+			// Lanczos sampling over a 3x3 neighborhood
+			for (int m = -2; m <= 2; m++)
+			{
+				for (int n = -2; n <= 2; n++)
+				{
+					int sampleRow = std::clamp<int>((int)srcRow + m, 0, (int)activeHeight - 1);
+					int sampleCol = std::clamp<int>((int)srcCol + n, 0, (int)activeWidth - 1);
+
+					double weight = Lanczos((double)m - (srcRowF - (double)srcRow)) * Lanczos((double)n - (srcColF - (double)srcCol));
+					sumWeight += weight;
+
+					OneSymbol &sample = activeGrid[(size_t)sampleRow][(size_t)sampleCol];
+					red += sample.backgroundColor.getR() * weight;
+					green += sample.backgroundColor.getG() * weight;
+					blue += sample.backgroundColor.getB() * weight;
+				}
+			}
+
+			// Normalize colors
+			if (sumWeight > 0.0)
+			{
+				red /= sumWeight;
+				green /= sumWeight;
+				blue /= sumWeight;
+			}
+
+			// Assign to scaled grid
+			scaledGrid[i][j].backgroundColor.setRed(std::clamp(red, 0.0, 255.0));
+			scaledGrid[i][j].backgroundColor.setGreen(std::clamp(green, 0.0, 255.0));
+			scaledGrid[i][j].backgroundColor.setBlue(std::clamp(blue, 0.0, 255.0));
 		}
 	}
 }
