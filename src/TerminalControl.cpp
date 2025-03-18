@@ -82,7 +82,8 @@ void TerminalControl::printTerminal() const
 }
 
 
-void TerminalControl::setUpScaledGrid()
+
+void TerminalControl::setUpScaledGrid(bool enforceEqualScale)
 {
 	getTerminalSize();
 	setTerminalSize();
@@ -90,18 +91,59 @@ void TerminalControl::setUpScaledGrid()
 	size_t activeHeight = activeGrid.size();
 	size_t activeWidth = activeGrid.empty() ? 0 : activeGrid[0].size();
 
+	if (activeHeight == 0 || activeWidth == 0)
+		return;
+
 	double rowScale = (double) activeHeight / (double) height;
 	double colScale = (double) activeWidth / (double) width;
 
-	for (size_t i = 0; i < height; i++)
+	// If enforcing equal scale, use the larger of the two
+	if (enforceEqualScale)
 	{
-		size_t srcRow = (size_t) ((double) i * rowScale);
-		for (size_t j = 0; j < width; j++)
-		{
-			size_t srcCol = (size_t) ((double) j * colScale);
-			scaledGrid[i][j] = activeGrid[srcRow][srcCol];
-		}
+		double uniformScale = std::max(rowScale, colScale);
+		rowScale = uniformScale;
+		colScale = uniformScale;
 	}
 
-	return;
+	for (size_t i = 0; i < height; i++)
+	{
+		double srcRowF = (double) i * rowScale;
+		size_t srcRow = (size_t) srcRowF;
+		double rowFrac = srcRowF - (double) srcRow;
+
+		for (size_t j = 0; j < width; j++)
+		{
+			double srcColF = (double) j * colScale;
+			size_t srcCol = (size_t) srcColF;
+			double colFrac = srcColF - (double) srcCol;
+
+			// Get the four closest values
+			OneSymbol &topLeft = activeGrid[srcRow][srcCol];
+			OneSymbol &topRight = (srcCol + 1 < activeWidth) ? activeGrid[srcRow][srcCol + 1] : topLeft;
+			OneSymbol &bottomLeft = (srcRow + 1 < activeHeight) ? activeGrid[srcRow + 1][srcCol] : topLeft;
+			OneSymbol &bottomRight = (srcRow + 1 < activeHeight && srcCol + 1 < activeWidth) ? activeGrid[srcRow + 1][srcCol + 1] : topLeft;
+
+			// Compute bilinear interpolation weights for each color channel
+			scaledGrid[i][j].backgroundColor.setRed(
+				topLeft.backgroundColor.getR() * (1 - rowFrac) * (1 - colFrac)
+				+ topRight.backgroundColor.getR() * (1 - rowFrac) * colFrac
+				+ bottomLeft.backgroundColor.getR() * rowFrac * (1 - colFrac)
+				+ bottomRight.backgroundColor.getR() * rowFrac * colFrac
+			);
+			
+			scaledGrid[i][j].backgroundColor.setGreen(
+				topLeft.backgroundColor.getG() * (1 - rowFrac) * (1 - colFrac)
+				+ topRight.backgroundColor.getG() * (1 - rowFrac) * colFrac
+				+ bottomLeft.backgroundColor.getG() * rowFrac * (1 - colFrac)
+				+ bottomRight.backgroundColor.getG() * rowFrac * colFrac
+			);
+			
+			scaledGrid[i][j].backgroundColor.setBlue(
+				topLeft.backgroundColor.getB() * (1 - rowFrac) * (1 - colFrac)
+				+ topRight.backgroundColor.getB() * (1 - rowFrac) * colFrac
+				+ bottomLeft.backgroundColor.getB() * rowFrac * (1 - colFrac)
+				+ bottomRight.backgroundColor.getB() * rowFrac * colFrac
+			);
+		}
+	}
 }

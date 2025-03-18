@@ -16,6 +16,9 @@
 #include "OneSymbol.h"
 
 
+#define GRID(terminal) (static_cast<std::vector<std::vector<OneSymbol>>&>(terminal))
+
+
 /**
  * @class TerminalControl
  * @brief A class to manage terminal size and output.
@@ -91,7 +94,7 @@ public:
      *
      * @note Assumes `activeGrid` is non-empty.
      */
-    void setUpScaledGrid();
+    void setUpScaledGrid(bool enforceEqualScale = true);
 
 
 private:
