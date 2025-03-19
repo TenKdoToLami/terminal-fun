@@ -37,14 +37,6 @@ public:
      */
     TerminalLoop(size_t Height, size_t Width, double FrameRate = 30.0, bool scaleRatio = true);
 
-    
-    /**
-     * @brief Virtual destructor.
-     *
-     * Ensures proper cleanup in derived classes.
-     */
-    virtual ~TerminalLoop() {}
-
 
     /**
      * @brief Starts the main loop, continuously updating and rendering the terminal.
