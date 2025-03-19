@@ -2,7 +2,7 @@
 
 
 TerminalLoop::TerminalLoop(size_t Height, size_t Width, double FrameRate, bool ScaleRatio)
-    : terminal(Height, Width), frameDuration(1000.0 / FrameRate), scaleRatio(ScaleRatio) {}
+    : terminal(Height, Width), scaleRatio(ScaleRatio), frameDuration(1000.0 / FrameRate) {}
 
 
 void TerminalLoop::run()

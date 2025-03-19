@@ -47,6 +47,7 @@ public:
 
 protected:
     TerminalControl terminal;   ///< Manages terminal size, clearing, and rendering.
+    const bool scaleRatio;      ///< Whether to maintain aspect ratio when resizing
 
     /**
      * @brief Updates the state of the effect.
@@ -65,5 +66,4 @@ protected:
 
 private:
     double frameDuration;       ///< Time duration of each frame in milliseconds.
-    const bool scaleRatio;      ///< Whether to maintain aspect ratio when resizing
 };

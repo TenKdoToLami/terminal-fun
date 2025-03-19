@@ -1,40 +1,16 @@
 #include <iostream>
+#include <thread>
 
-
-#include "TerminalControl.h"
-#include "OneSymbol.h"
-#include "TerminalEffects.h"
+#include "GrayScaleGradient.h"
 
 int main(void)
 {
-    //OneSymbol test('#', Colors::RED, Colors::GREEN);
-    //std::cout << test << test;
-    //std::cout << test.foregroundColor.getBlue() << std::endl;
+    std::ios::sync_with_stdio(false);
+    std::cout.tie(nullptr);   
+    GrayScaleGradient object(60);
+    object.run();
     
-    //TerminalControl test;
-    //test.getTerminalSize();
-    //test.setTerminalSize();
-    //test.printTerminal();
-    //char a;
-    //std::cin >> a;
-    //test.clearTerminal();
-    //TerminalEffects::changeColorEffect(test, Colors::BLUE);
-    //test.printTerminal();
-    //std::cin >> a;
-    //test.clearTerminal();
+    //std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     
-
-
-    TerminalControl test;
-    test.getTerminalSize();
-    test.setTerminalSize();
-    test.printTerminal();
-    char a;
-    std::cin >> a;
-    test.clearTerminal();
-    TerminalEffects::invertColorEffect(test);
-    test.printTerminal();
-    std::cin >> a;
-    test.clearTerminal();
     return 0;
 }

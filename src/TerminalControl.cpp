@@ -34,6 +34,7 @@ TerminalControl::~TerminalControl()
 	std::cout << "\033[?25h";
 	std::cout.flush();
 
+	clearTerminal();
 	// Restore input character echoing
 	struct termios tty;
 	tcgetattr(STDIN_FILENO, &tty);
