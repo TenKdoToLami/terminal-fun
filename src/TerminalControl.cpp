@@ -1,3 +1,9 @@
+/**
+ * @file TerminalControl.cpp
+ * @brief Implementation of terminal control functionalities.
+ */
+
+
 #include "TerminalControl.h"
 
 
@@ -15,6 +21,9 @@ TerminalControl::TerminalControl(const size_t Height, const size_t Width)
 	struct termios tty;
 	tcgetattr(STDIN_FILENO, &tty);
 	tty.c_lflag &= tcflag_t(~ECHO);
+	tty.c_lflag &= tcflag_t(~ICANON);
+	tty.c_cc[VMIN] = 0;
+	tty.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 }
 
@@ -83,79 +92,105 @@ void TerminalControl::printTerminal() const
 
 
 
-void TerminalControl::setUpScaledGrid(bool enforceEqualScale)
+void TerminalControl::setUpScaledGrid(bool scaleRatio)
 {
 	getTerminalSize();
 	setTerminalSize();
 
-	size_t activeHeight = activeGrid.size();
-	size_t activeWidth = activeGrid.empty() ? 0 : activeGrid[0].size();
-
-	if (activeHeight == 0 || activeWidth == 0)
-		return;
-
-	double rowScale = (double)activeHeight / (double)height;
-	double colScale = (double)activeWidth / (double)width;
-
-	// Enforce equal scale if needed
-	if (enforceEqualScale)
-	{
-		double uniformScale = std::max(rowScale, colScale);
-		rowScale = uniformScale;
-		colScale = uniformScale;
-	}
+	double rowScale, colScale;
+	computeScalingFactors(rowScale, colScale, scaleRatio);
 
 	for (size_t i = 0; i < height; i++)
 	{
-		// Source row range
-		double srcRowStart = (double)i * rowScale;
-		double srcRowEnd = ((double)i + 1) * rowScale;
+		double srcRowStart, srcRowEnd;
+		getSourceRowRange(i, rowScale, srcRowStart, srcRowEnd);
 
 		for (size_t j = 0; j < width; j++)
 		{
-			// Source column range
-			double srcColStart = (double)j * colScale;
-			double srcColEnd = ((double)j + 1) * colScale;
+			double srcColStart, srcColEnd;
+			getSourceColRange(j, colScale, srcColStart, srcColEnd);
 
-			double sumWeight = 0.0;
-			double red = 0.0, green = 0.0, blue = 0.0;
+			size_t rowStart, rowEnd, colStart, colEnd;
+			getSourceBounds(srcRowStart, srcRowEnd, srcColStart, srcColEnd, rowStart, rowEnd, colStart, colEnd);
 
-			// Iterate over affected source pixels
-			size_t rowStart = (size_t)srcRowStart;
-			size_t rowEnd = std::min((size_t)srcRowEnd, activeHeight - 1);
-			size_t colStart = (size_t)srcColStart;
-			size_t colEnd = std::min((size_t)srcColEnd, activeWidth - 1);
+			Color computedColor(0,0,0);
+			computeAveragedColor(rowStart, rowEnd, colStart, colEnd, srcRowStart, srcRowEnd, srcColStart, srcColEnd, computedColor);
 
-			for (size_t srcRow = rowStart; srcRow <= rowEnd; srcRow++)
-			{
-				for (size_t srcCol = colStart; srcCol <= colEnd; srcCol++)
-				{
-					// Compute overlapping area fraction
-					double rowOverlap = std::min(srcRowEnd, (double)srcRow + 1.0) - std::max(srcRowStart, (double)srcRow);
-					double colOverlap = std::min(srcColEnd, (double)srcCol + 1.0) - std::max(srcColStart, (double)srcCol);
-					double weight = rowOverlap * colOverlap;
-
-					// Accumulate weighted colors
-					OneSymbol &sample = activeGrid[srcRow][srcCol];
-					red += sample.backgroundColor.getR() * weight;
-					green += sample.backgroundColor.getG() * weight;
-					blue += sample.backgroundColor.getB() * weight;
-					sumWeight += weight;
-				}
-			}
-
-			// Normalize colors
-			if (sumWeight > 0.0)
-			{
-				red /= sumWeight;
-				green /= sumWeight;
-				blue /= sumWeight;
-			}
-
-			// Assign to scaled grid
-			scaledGrid[i][j].backgroundColor.setRed(std::clamp(red, 0.0, 255.0));
-			scaledGrid[i][j].backgroundColor.setGreen(std::clamp(green, 0.0, 255.0));
-			scaledGrid[i][j].backgroundColor.setBlue(std::clamp(blue, 0.0, 255.0));
+			scaledGrid[i][j].backgroundColor.setColor(computedColor);
 		}
 	}
+
+	return;
+}
+
+void TerminalControl::computeScalingFactors(double & rowScale, double & colScale, bool scaleRatio) const
+{
+	rowScale = (double)activeGrid.size() / (double)height;
+	colScale = (double)activeGrid[0].size() / (double)width;
+
+	if (scaleRatio)
+		return;
+	
+	double uniformScale = std::max(rowScale, colScale);
+	rowScale = uniformScale;
+	colScale = uniformScale;
+
+	return;
+}
+
+void TerminalControl::getSourceRowRange(size_t i, double rowScale, double & srcRowStart, double & srcRowEnd) const
+{
+	srcRowStart = (double)i * rowScale;
+	srcRowEnd = ((double)i + 1) * rowScale;
+
+	return;
+}
+
+void TerminalControl::getSourceColRange(size_t j, double colScale, double &srcColStart, double &srcColEnd) const
+{
+	srcColStart = (double)j * colScale;
+	srcColEnd = ((double)j + 1) * colScale;
+
+	return;
+}
+
+void TerminalControl::getSourceBounds(double srcRowStart, double srcRowEnd, double srcColStart, double srcColEnd,
+									  size_t & rowStart, size_t & rowEnd, size_t & colStart, size_t & colEnd) const
+{
+	rowStart = (size_t)srcRowStart;
+	rowEnd = std::min((size_t)srcRowEnd, activeGrid.size() - 1);
+	colStart = (size_t)srcColStart;
+	colEnd = std::min((size_t)srcColEnd, activeGrid[0].size() - 1);
+
+	return;
+}
+
+void TerminalControl::computeAveragedColor(size_t rowStart, size_t rowEnd, size_t colStart, size_t colEnd,
+										   double srcRowStart, double srcRowEnd, double srcColStart,
+										   double srcColEnd, Color & computedColor) const
+{
+	double sumWeight = 0.0;
+
+	for (size_t srcRow = rowStart; srcRow <= rowEnd; srcRow++)
+		for (size_t srcCol = colStart; srcCol <= colEnd; srcCol++)
+		{
+			double rowOverlap = std::min(srcRowEnd, (double)srcRow + 1.0) - std::max(srcRowStart, (double)srcRow);
+			double colOverlap = std::min(srcColEnd, (double)srcCol + 1.0) - std::max(srcColStart, (double)srcCol);
+			double weight = rowOverlap * colOverlap;
+
+			OneSymbol sample = activeGrid[srcRow][srcCol];
+			computedColor.adjustRed(sample.backgroundColor.getR() * weight);
+			computedColor.adjustGreen(sample.backgroundColor.getG() * weight);
+			computedColor.adjustBlue(sample.backgroundColor.getB() * weight);
+			sumWeight += weight;
+		}
+
+	if (sumWeight <= 0.0)
+		return;
+	
+	computedColor.setRed(computedColor.getR() / sumWeight);
+	computedColor.setGreen(computedColor.getG() / sumWeight);
+	computedColor.setBlue(computedColor.getB() / sumWeight);
+
+	return;
 }

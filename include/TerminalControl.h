@@ -85,17 +85,78 @@ public:
      * This function retrieves the current terminal size, resizes `scaledGrid`
      * accordingly, and scales `activeGrid` to fit within it.
      *
-     * The scaling uses a nearest-neighbor approach:
-     * - If `activeGrid` is larger than `scaledGrid`, it shrinks by selecting the closest matching symbols.
-     * - If `activeGrid` is smaller, it expands by duplicating the nearest symbols.
-     *
-     * The function ensures that `scaledGrid` is properly populated, preventing
-     * out-of-bounds access when mapping between `activeGrid` and `scaledGrid`.
+     * @param scaleRatio If true, scales proportionally; otherwise, scales uniformly.
      *
      * @note Assumes `activeGrid` is non-empty.
      */
-    void setUpScaledGrid(bool enforceEqualScale = true);
+    void setUpScaledGrid(bool scaleRatio = true);
 
+
+    /**
+     * @brief Computes scaling factors for row and column adjustments.
+     * 
+     * @param rowScale Reference to store the computed row scaling factor.
+     * @param colScale Reference to store the computed column scaling factor.
+     * @param scaleRatio If true, maintains the aspect ratio while scaling.
+     */
+    void computeScalingFactors(double & rowScale, double & colScale, bool scaleRatio) const;
+
+
+    /**
+     * @brief Computes the source row range for scaling.
+     * 
+     * @param i Row index in the scaled grid.
+     * @param rowScale Scaling factor for rows.
+     * @param srcRowStart Reference to store the computed source row start.
+     * @param srcRowEnd Reference to store the computed source row end.
+     */
+    void getSourceRowRange(size_t i, double rowScale, double & srcRowStart, double & srcRowEnd) const;
+
+
+    /**
+     * @brief Computes the source column range for scaling.s
+     * 
+     * @param j Column index in the scaled grid.
+     * @param colScale Scaling factor for columns.
+     * @param srcColStart Reference to store the computed source column start.
+     * @param srcColEnd Reference to store the computed source column end.
+     */
+    void getSourceColRange(size_t j, double colScale, double & srcColStart, double & srcColEnd) const;
+
+
+    /**
+     * @brief Determines the source bounds for mapping grid values.
+     * 
+     * @param srcRowStart Source row start position.
+     * @param srcRowEnd Source row end position.
+     * @param srcColStart Source column start position.
+     * @param srcColEnd Source column end position.
+     * @param rowStart Reference to store computed row start index.
+     * @param rowEnd Reference to store computed row end index.
+     * @param colStart Reference to store computed column start index.
+     * @param colEnd Reference to store computed column end index.
+     */
+    void getSourceBounds(double srcRowStart, double srcRowEnd, double srcColStart, double srcColEnd, 
+                         size_t & rowStart, size_t & rowEnd, size_t & colStart, size_t & colEnd) const;
+
+    /**
+     * @brief Computes the averaged color values for scaling.
+     * 
+     * @param rowStart Start row index in activeGrid.
+     * @param rowEnd End row index in activeGrid.
+     * @param colStart Start column index in activeGrid.
+     * @param colEnd End column index in activeGrid.
+     * @param srcRowStart Source row start position.
+     * @param srcRowEnd Source row end position.
+     * @param srcColStart Source column start position.
+     * @param srcColEnd Source column end position.
+     * @param red Reference to store computed red color value.
+     * @param green Reference to store computed green color value.
+     * @param blue Reference to store computed blue color value.
+     */
+    void computeAveragedColor(size_t rowStart, size_t rowEnd, size_t colStart, size_t colEnd, 
+                              double srcRowStart, double srcRowEnd, double srcColStart, 
+                              double srcColEnd, Color & computedColor) const;
 
 private:
     size_t width;           ///< Width of the terminal in columns.
