@@ -92,6 +92,38 @@ public:
     void setUpScaledGrid(bool scaleRatio = true);
 
 
+private:
+    size_t width;           ///< Width of the terminal in columns.
+    size_t height;          ///< Height of the terminal in rows.
+
+    std::vector < std::vector < OneSymbol > > activeGrid;  ///< The main grid being modified (Also referenced as terminalGrid)
+    std::vector < std::vector < OneSymbol > > scaledGrid;  ///< The scaled grid used for printing
+
+
+    /**
+    * @brief Resizes the scaled grid to match the specified dimensions.
+    *
+    * This function adjusts the size of `scaledGrid` to match the
+    * current `height` and `width`. It ensures that each row is resized
+    * correctly to maintain a consistent grid structure.
+    *
+    * @note Assumes `height` and `width` must be already set.
+    */
+    void setTerminalSize();
+
+
+    /**
+     * @brief Retrieves the current terminal size.
+     *
+     * This function queries the terminal for its current dimensions (columns and rows)
+     * and updates the `width` and `height` member variables accordingly.
+     *
+     * @note This function is platform-dependent and only works on terminals that
+     *       support the `TIOCGWINSZ` ioctl command (POSIX systems).
+     */
+    void getTerminalSize();
+
+
     /**
      * @brief Computes scaling factors for row and column adjustments.
      * 
@@ -157,35 +189,4 @@ public:
     void computeAveragedColor(size_t rowStart, size_t rowEnd, size_t colStart, size_t colEnd, 
                               double srcRowStart, double srcRowEnd, double srcColStart, 
                               double srcColEnd, Color & computedColor) const;
-
-private:
-    size_t width;           ///< Width of the terminal in columns.
-    size_t height;          ///< Height of the terminal in rows.
-
-    std::vector < std::vector < OneSymbol > > activeGrid;  ///< The main grid being modified (Also referenced as terminalGrid)
-    std::vector < std::vector < OneSymbol > > scaledGrid;  ///< The scaled grid used for printing
-
-
-    /**
-    * @brief Resizes the scaled grid to match the specified dimensions.
-    *
-    * This function adjusts the size of `scaledGrid` to match the
-    * current `height` and `width`. It ensures that each row is resized
-    * correctly to maintain a consistent grid structure.
-    *
-    * @note Assumes `height` and `width` must be already set.
-    */
-    void setTerminalSize();
-
-
-    /**
-     * @brief Retrieves the current terminal size.
-     *
-     * This function queries the terminal for its current dimensions (columns and rows)
-     * and updates the `width` and `height` member variables accordingly.
-     *
-     * @note This function is platform-dependent and only works on terminals that
-     *       support the `TIOCGWINSZ` ioctl command (POSIX systems).
-     */
-    void getTerminalSize();
 };
