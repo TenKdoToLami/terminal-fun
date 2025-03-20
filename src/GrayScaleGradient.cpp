@@ -35,6 +35,6 @@ void GrayScaleGradient::update()
     auto &grid = GRID(terminal);
     for (size_t i = 1; i < DIMENSIONS; i++)
         std::swap(grid[i],grid[i - 1]);    
-    std::swap(grid.front(), grid.back());
+    //std::swap(grid.front(), grid.back());
     return;
 };
