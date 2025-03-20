@@ -17,19 +17,19 @@ bool Color::operator!=(const Color & other) const
 
 int Color::getRed() const
 {
-    return std::clamp(int(red), 0, 255);
+    return int(red);
 }
 
 
 int Color::getBlue() const
 {
-    return std::clamp(int(blue), 0, 255);
+    return int(blue);
 }
 
 
 int Color::getGreen() const
 {
-    return std::clamp(int(green), 0, 255);
+    return int(green);
 }
 
 

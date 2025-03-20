@@ -80,7 +80,7 @@ public:
      */
     friend std::ostream & operator << (std::ostream & os, const OneSymbol & oneSymbol);
 
-    
+    std::string toString() const;
 //private:
     char symbol;                  ///< The character symbol represented by the OneSymbol object.
     Color foregroundColor;        ///< The foreground color of the symbol.

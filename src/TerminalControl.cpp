@@ -100,14 +100,15 @@ void TerminalControl::setUpScaledGrid(bool scaleRatio)
 
 	double rowScale, colScale;
 	computeScalingFactors(rowScale, colScale, scaleRatio);
-
+	
+	#pragma omp parallel for collapse(2) schedule(static)
 	for (size_t i = 0; i < height; i++)
 	{
-		double srcRowStart, srcRowEnd;
-		getSourceRowRange(i, rowScale, srcRowStart, srcRowEnd);
-
 		for (size_t j = 0; j < width; j++)
 		{
+			double srcRowStart, srcRowEnd;
+			getSourceRowRange(i, rowScale, srcRowStart, srcRowEnd);
+
 			double srcColStart, srcColEnd;
 			getSourceColRange(j, colScale, srcColStart, srcColEnd);
 
@@ -168,30 +169,32 @@ void TerminalControl::getSourceBounds(double srcRowStart, double srcRowEnd, doub
 
 void TerminalControl::computeAveragedColor(size_t rowStart, size_t rowEnd, size_t colStart, size_t colEnd,
 										   double srcRowStart, double srcRowEnd, double srcColStart,
-										   double srcColEnd, Color & computedColor) const
+										   double srcColEnd, Color &computedColor) const
 {
 	double sumWeight = 0.0;
+	double rSum = 0.0, gSum = 0.0, bSum = 0.0; // Avoid multiple function calls
 
-	for (size_t srcRow = rowStart; srcRow <= rowEnd; srcRow++)
-		for (size_t srcCol = colStart; srcCol <= colEnd; srcCol++)
+	for (size_t srcRow = rowStart; srcRow <= rowEnd; ++srcRow)
+	{
+		double rowOverlap = std::min(srcRowEnd, srcRow + 1.0) - std::max(srcRowStart, static_cast<double>(srcRow));
+
+		for (size_t srcCol = colStart; srcCol <= colEnd; ++srcCol)
 		{
-			double rowOverlap = std::min(srcRowEnd, (double)srcRow + 1.0) - std::max(srcRowStart, (double)srcRow);
-			double colOverlap = std::min(srcColEnd, (double)srcCol + 1.0) - std::max(srcColStart, (double)srcCol);
+			double colOverlap = std::min(srcColEnd, srcCol + 1.0) - std::max(srcColStart, static_cast<double>(srcCol));
 			double weight = rowOverlap * colOverlap;
 
-			OneSymbol sample = activeGrid[srcRow][srcCol];
-			computedColor.adjustRed(sample.backgroundColor.getR() * weight);
-			computedColor.adjustGreen(sample.backgroundColor.getG() * weight);
-			computedColor.adjustBlue(sample.backgroundColor.getB() * weight);
+			const OneSymbol &sample = activeGrid[srcRow][srcCol]; // Use reference to avoid copying
+			rSum += sample.backgroundColor.getR() * weight;
+			gSum += sample.backgroundColor.getG() * weight;
+			bSum += sample.backgroundColor.getB() * weight;
 			sumWeight += weight;
 		}
+	}
 
-	if (sumWeight <= 0.0)
-		return;
-	
-	computedColor.setRed(computedColor.getR() / sumWeight);
-	computedColor.setGreen(computedColor.getG() / sumWeight);
-	computedColor.setBlue(computedColor.getB() / sumWeight);
-
-	return;
+	if (sumWeight > 0.0)
+	{
+		computedColor.setRed(rSum / sumWeight);
+		computedColor.setGreen(gSum / sumWeight);
+		computedColor.setBlue(bSum / sumWeight);
+	}
 }

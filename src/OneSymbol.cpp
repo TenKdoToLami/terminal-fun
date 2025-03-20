@@ -33,3 +33,15 @@ std::ostream &operator<<(std::ostream &os, const OneSymbol & oneSymbol)
         
     return os;
 }
+
+
+std::string OneSymbol::toString() const
+{
+    return "\033[38;2;" + std::to_string(foregroundColor.getRed()) + ";" +
+           std::to_string(foregroundColor.getGreen()) + ";" +
+           std::to_string(foregroundColor.getBlue()) + "m" +
+           "\033[48;2;" + std::to_string(backgroundColor.getRed()) + ";" +
+           std::to_string(backgroundColor.getGreen()) + ";" +
+           std::to_string(backgroundColor.getBlue()) + "m" +
+           symbol + "\033[0m";
+}
