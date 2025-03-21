@@ -14,6 +14,9 @@
 #include "TerminalControl.h"
 
 
+#define DIMENSIONS 100
+
+
 /**
  * @class TerminalLoop
  * @brief Abstract base class for terminal-based rendering loops.

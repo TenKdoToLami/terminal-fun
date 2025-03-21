@@ -101,7 +101,7 @@ void TerminalControl::setUpScaledGrid(bool scaleRatio)
 	double rowScale, colScale;
 	computeScalingFactors(rowScale, colScale, scaleRatio);
 	
-	#pragma omp parallel for collapse(2) schedule(static)
+	#pragma omp target teams distribute parallel for collapse(2)
 	for (size_t i = 0; i < height; i++)
 	{
 		for (size_t j = 0; j < width; j++)

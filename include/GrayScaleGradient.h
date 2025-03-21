@@ -10,7 +10,6 @@
 #include "TerminalLoop.h"
 
 
-#define DIMENSIONS 100
 /**
  * @class GrayScaleGradient
  * @brief Generates and displays a dynamic grayscale gradient.
