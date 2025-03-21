@@ -7,37 +7,47 @@
 #include "MainMenu.h"
 
 
-
 void displayMenu(const std::vector<MenuOption> &options)
 {
-    std::cout << "Welcome to the Terminal Graphics Demo!\n\n";
-    std::cout << "Select an option:\n";
+    std::vector <OneSymbol> headerText = stringToOneSymbolVector("Welcome to ", Colors::WHITE, Colors::BLACK);
+    std::vector <OneSymbol> titleText = stringToOneSymbolVector("Terminal Graphics Demo!", Colors::CYAN, Colors::BLACK);
+    std::cout 
+        << headerText
+        << titleText
+        << "\nselect an option:\n";
 
     for (size_t i = 0; i < options.size(); i++)
     {
-        std::cout << i << ". " << options[i].name << std::endl;
+        std::cout << i << ". ";
+        std::cout << options[i].text;
     }
 
-    std::cout << "Q. Exit\n";
+    std::vector<OneSymbol> exitText = stringToOneSymbolVector("Q. Exit", Colors::RED, Colors::BLACK);
+    std::cout <<exitText;
+
     std::cout << "Enter your choice: ";
 }
 
 
-/**
- * @brief Runs the main menu loop.
- *
- * The function continuously displays the menu, processes user input,
- * and executes selected actions until the user chooses to exit.
- */
 void runMainMenu()
 {
     bool running = true;
-    std::vector<MenuOption> menuOptions =
+
+    std::vector <MenuOption> menuOptions =
+    {
         {
-            {"Random Colors Grid", []()
-             { RandomColors randomColors; randomColors.run(); }},
-            {"Grayscale Gradient", []()
-             { GrayScaleGradient grayScale; grayScale.run(); }}};
+            stringToOneSymbolVector("Random Colors Grid", Colors::GREEN, Colors::BLACK),[]() 
+            { 
+                RandomColors randomColors; randomColors.run(); 
+            }
+        },
+        {
+            stringToOneSymbolVector("Grayscale Gradient", Colors::GRAY, Colors::BLACK),[]() 
+            { 
+                GrayScaleGradient grayScale; grayScale.run(); 
+            }
+        }
+    };
 
     while (running)
     {
@@ -48,7 +58,7 @@ void runMainMenu()
         if (choice == "Q" || choice == "q")
         {
             running = false;
-            std::cout << "Exiting the program. Goodbye!" << std::endl;
+            std::cout << stringToOneSymbolVector("Exiting the program.", Colors::RED, Colors::BLACK);
         }
         else
         {
@@ -70,4 +80,29 @@ void runMainMenu()
             }
         }
     }
+}
+
+
+std::vector <OneSymbol> stringToOneSymbolVector(const std::string & text, const Color & fgColor, const Color & bgColor)
+{
+    std::vector <OneSymbol> result;
+    result.reserve(text.size());
+
+    for (char ch : text)
+    {
+        result.emplace_back(ch, fgColor, bgColor);
+    }
+
+    return result;
+}
+
+
+std::ostream & operator <<(std::ostream & os, const std::vector <OneSymbol> & text)
+{
+    for (const auto & symbol : text)
+    {
+        os << symbol;
+    }
+    os << "\n";
+    return os;
 }
