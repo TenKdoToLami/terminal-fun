@@ -1,16 +1,8 @@
-#include <iostream>
-#include <thread>
+#include "MainMenu.h"
 
-#include "GrayScaleGradient.h"
 
-int main(void)
+int main()
 {
-    std::ios::sync_with_stdio(false);
-    std::cout.tie(nullptr);   
-    GrayScaleGradient object(165);
-    object.run();
-    
-    //std::this_thread::sleep_for(std::chrono::milliseconds(2000));
-    
+    runMainMenu();
     return 0;
 }
