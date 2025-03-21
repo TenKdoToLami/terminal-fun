@@ -38,7 +38,7 @@ TerminalControl::~TerminalControl()
 	// Restore input character echoing
 	struct termios tty;
 	tcgetattr(STDIN_FILENO, &tty);
-	tty.c_lflag |= ECHO;
+	tty.c_lflag |= ECHO | ICANON;
 	tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 }
 
