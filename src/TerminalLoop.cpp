@@ -12,7 +12,7 @@ void TerminalLoop::run()
         char ch;
         if (read(STDIN_FILENO, &ch, 1) > 0 && (ch == 'Q' || ch == 'q'))
             return;
-        
+
         auto startTime = std::chrono::high_resolution_clock::now();
 
         update();

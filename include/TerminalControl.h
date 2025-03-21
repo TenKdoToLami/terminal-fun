@@ -52,9 +52,9 @@ public:
     /**
     * @brief Conversion operator to retrieve the active terminal grid.
     *
-    * This operator allows an instance of TerminalControl to be implicitly converted 
+    * This operator allows an instance of TerminalControl to be implicitly converted
     * into a reference to a 2D vector of OneSymbol objects, representing the active grid.
-    * 
+    *
     * @return std::vector<std::vector<OneSymbol>>& A reference to the active grid.
     */
     operator std::vector < std::vector < OneSymbol > > & ();
@@ -126,7 +126,7 @@ private:
 
     /**
      * @brief Computes scaling factors for row and column adjustments.
-     * 
+     *
      * @param rowScale Reference to store the computed row scaling factor.
      * @param colScale Reference to store the computed column scaling factor.
      * @param scaleRatio If true, maintains the aspect ratio while scaling.
@@ -136,7 +136,7 @@ private:
 
     /**
      * @brief Computes the source row range for scaling.
-     * 
+     *
      * @param i Row index in the scaled grid.
      * @param rowScale Scaling factor for rows.
      * @param srcRowStart Reference to store the computed source row start.
@@ -147,7 +147,7 @@ private:
 
     /**
      * @brief Computes the source column range for scaling.s
-     * 
+     *
      * @param j Column index in the scaled grid.
      * @param colScale Scaling factor for columns.
      * @param srcColStart Reference to store the computed source column start.
@@ -158,7 +158,7 @@ private:
 
     /**
      * @brief Determines the source bounds for mapping grid values.
-     * 
+     *
      * @param srcRowStart Source row start position.
      * @param srcRowEnd Source row end position.
      * @param srcColStart Source column start position.
@@ -168,12 +168,12 @@ private:
      * @param colStart Reference to store computed column start index.
      * @param colEnd Reference to store computed column end index.
      */
-    void getSourceBounds(double srcRowStart, double srcRowEnd, double srcColStart, double srcColEnd, 
+    void getSourceBounds(double srcRowStart, double srcRowEnd, double srcColStart, double srcColEnd,
                          size_t & rowStart, size_t & rowEnd, size_t & colStart, size_t & colEnd) const;
 
     /**
      * @brief Computes the averaged color values for scaling.
-     * 
+     *
      * @param rowStart Start row index in activeGrid.
      * @param rowEnd End row index in activeGrid.
      * @param colStart Start column index in activeGrid.
@@ -186,7 +186,7 @@ private:
      * @param green Reference to store computed green color value.
      * @param blue Reference to store computed blue color value.
      */
-    void computeAveragedColor(size_t rowStart, size_t rowEnd, size_t colStart, size_t colEnd, 
-                              double srcRowStart, double srcRowEnd, double srcColStart, 
+    void computeAveragedColor(size_t rowStart, size_t rowEnd, size_t colStart, size_t colEnd,
+                              double srcRowStart, double srcRowEnd, double srcColStart,
                               double srcColEnd, Color & computedColor) const;
 };

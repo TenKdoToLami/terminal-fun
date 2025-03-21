@@ -23,7 +23,7 @@
 struct Color
 {
 
-    
+
     /**
      * @brief Constructs a Color with specified RGB values.
      *
@@ -36,7 +36,7 @@ struct Color
 
     /**
      * @brief Checks if two colors are equal.
-     * 
+     *
      * @param other The color to compare with.
      * @return True if the colors are the same, false otherwise.
      */
@@ -45,7 +45,7 @@ struct Color
 
     /**
      * @brief Checks if two colors are different.
-     * 
+     *
      * @param other The color to compare with.
      * @return True if the colors are different, false otherwise.
      */
@@ -77,10 +77,10 @@ struct Color
 
     /**
      * @brief Retrieves the red component as a double.
-     * 
+     *
      * Returns the raw red component value without clamping or rounding.
      * This allows precise operations without integer constraints.
-     * 
+     *
      * @return double The red component value.
      */
     double getR() const;
@@ -88,10 +88,10 @@ struct Color
 
     /**
      * @brief Retrieves the blue component as a double.
-     * 
+     *
      * Returns the raw blue component value without clamping or rounding.
      * This allows precise operations without integer constraints.
-     * 
+     *
      * @return double The blue component value.
      */
     double getB() const;
@@ -99,10 +99,10 @@ struct Color
 
     /**
      * @brief Retrieves the green component as a double.
-     * 
+     *
      * Returns the raw green component value without clamping or rounding.
      * This allows precise operations without integer constraints.
-     * 
+     *
      * @return double The green component value.
      */
     double getG() const;
@@ -151,17 +151,17 @@ struct Color
 
     /**
      * @brief Inverts the red component.
-     * 
+     *
      * Reverses the intensity of the red component by subtracting its current value from 255.
      * This creates a complementary color effect, ensuring the red component moves toward the opposite end of the spectrum.
      * The result is clamped within the valid range [0, 255].
      */
     void invertRed();
 
-    
+
     /**
      * @brief Inverts the green component.
-     * 
+     *
      * Reverses the intensity of the green component by subtracting its current value from 255.
      * This produces a complementary color effect, ensuring the green component moves toward the opposite end of the spectrum.
      * The result is clamped within the valid range [0, 255].
@@ -171,7 +171,7 @@ struct Color
 
     /**
      * @brief Inverts the blue component.
-     * 
+     *
      * Reverses the intensity of the blue component by subtracting its current value from 255.
      * This generates a complementary color effect, ensuring the blue component moves toward the opposite end of the spectrum.
      * The result is clamped within the valid range [0, 255].
@@ -181,7 +181,7 @@ struct Color
 
     /**
      * @brief Inverts all color components.
-     * 
+     *
      * Applies the inversion operation to the red, green, and blue components.
      * This results in a full-color inversion, producing a negative of the original color.
      * It is equivalent to subtracting each color component from 255.
@@ -191,9 +191,9 @@ struct Color
 
     /**
      * @brief Scales the red component by a given coefficient.
-     * 
+     *
      * Multiplies the red component by the given coefficient, clamping the result within the valid range [0, 255].
-     * 
+     *
      * @param coefficient The factor by which the red component is scaled.
      */
     void scaleRed(const double coefficient);
@@ -201,9 +201,9 @@ struct Color
 
     /**
      * @brief Scales the green component by a given coefficient.
-     * 
+     *
      * Multiplies the green component by the given coefficient, clamping the result within the valid range [0, 255].
-     * 
+     *
      * @param coefficient The factor by which the green component is scaled.
      */
     void scaleGreen(const double coefficient);
@@ -211,9 +211,9 @@ struct Color
 
     /**
      * @brief Scales the blue component by a given coefficient.
-     * 
+     *
      * Multiplies the blue component by the given coefficient, clamping the result within the valid range [0, 255].
-     * 
+     *
      * @param coefficient The factor by which the blue component is scaled.
      */
     void scaleBlue(const double coefficient);
@@ -221,10 +221,10 @@ struct Color
 
     /**
      * @brief Adjusts the brightness of the color by scaling all components.
-     * 
+     *
      * Multiplies the red, green, and blue components by the given coefficient, effectively making the color brighter (>1.0) or darker (<1.0).
      * The result is clamped within the valid range [0, 255] to prevent overflow.
-     * 
+     *
      * @param coefficient The brightness scaling factor (e.g., 1.2 increases brightness, 0.8 decreases it).
      */
     void scaleColor(const double coefficient);
@@ -232,14 +232,14 @@ struct Color
 
     /**
      * @brief Scales each color component individually using a coefficient.
-     * 
+     *
      * This method applies a per-channel scaling operation using the provided coefficient.
-     * Although the coefficient is passed as a `Color` object, it is used purely as a container 
+     * Although the coefficient is passed as a `Color` object, it is used purely as a container
      * for three independent double values rather than as an actual color.
-     * 
+     *
      * Each component (red, green, blue) is scaled by the corresponding value in the coefficient,
      * and the result is clamped within the valid range [0, 255].
-     * 
+     *
      * @param coefficient A `Color` object where each component acts as a scaling factor.
      */
     void scaleColor(const Color coefficient);
@@ -247,9 +247,9 @@ struct Color
 
     /**
      * @brief Adjusts the red component by a given increment.
-     * 
+     *
      * Adds the given increment to the red component, clamping the result within the valid range [0, 255].
-     * 
+     *
      * @param increment The value to be added to the red component.
      */
     void adjustRed(const double increment);
@@ -257,9 +257,9 @@ struct Color
 
     /**
      * @brief Adjusts the green component by a given increment.
-     * 
+     *
      * Adds the given increment to the green component, clamping the result within the valid range [0, 255].
-     * 
+     *
      * @param increment The value to be added to the green component.
      */
     void adjustGreen(const double increment);
@@ -267,34 +267,34 @@ struct Color
 
     /**
      * @brief Adjusts the blue component by a given increment.
-     * 
+     *
      * Adds the given increment to the blue component, clamping the result within the valid range [0, 255].
-     * 
+     *
      * @param increment The value to be added to the blue component.
      */
     void adjustBlue(const double increment);
 
     /**
-     * @brief Adjusts the brightness of the color by modifying all components.  
-     *  
-     * Increases or decreases the red, green, and blue components by the given increment, effectively making the color brighter (positive values) or darker (negative values).  
-     * The result is clamped within the valid range [0, 255] to prevent overflow.  
-     *  
-     * @param increment The value to be added to all components (e.g., +20 brightens the color, -20 darkens it).  
+     * @brief Adjusts the brightness of the color by modifying all components.
+     *
+     * Increases or decreases the red, green, and blue components by the given increment, effectively making the color brighter (positive values) or darker (negative values).
+     * The result is clamped within the valid range [0, 255] to prevent overflow.
+     *
+     * @param increment The value to be added to all components (e.g., +20 brightens the color, -20 darkens it).
      */
     void adjustColor(const double increment);
 
 
     /**
      * @brief Adjusts each color component individually by an increment.
-     * 
-     * This method modifies the red, green, and blue components by adding the corresponding 
-     * values from the given increment. Although the increment is passed as a `Color` object, 
+     *
+     * This method modifies the red, green, and blue components by adding the corresponding
+     * values from the given increment. Although the increment is passed as a `Color` object,
      * it serves as a container for three independent double values rather than as an actual color.
-     * 
+     *
      * Each component (red, green, blue) is adjusted by its respective value in the increment,
      * and the result is clamped within the valid range [0, 255].
-     * 
+     *
      * @param increment A `Color` object where each component acts as an additive offset.
      */
     void adjustColor(const Color increment);
@@ -302,7 +302,7 @@ struct Color
 
     /**
      * @brief Converts the color to grayscale.
-     * 
+     *
      * This sets the red, green, and blue components to their average value,
      * creating a neutral tone while maintaining brightness.
      */
@@ -311,13 +311,13 @@ struct Color
 
     /**
      * @brief Blends the current color with another color.
-     * 
+     *
      * Performs linear interpolation between this color and another,
      * adjusting each RGB component based on the given blend factor.
-     * A factor of 0.0 keeps the original color, while a factor of 1.0 
-     * fully replaces it with the other color. Values in between create 
+     * A factor of 0.0 keeps the original color, while a factor of 1.0
+     * fully replaces it with the other color. Values in between create
      * a smooth transition.
-     * 
+     *
      * @param other The other color to blend with.
      * @param factor Blend factor (0.0 = no change, 1.0 = full transition to other color).
      */

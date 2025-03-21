@@ -30,7 +30,7 @@ std::ostream &operator<<(std::ostream &os, const OneSymbol & oneSymbol)
         << backgroundColor.getRed() << ";" << backgroundColor.getGreen() << ";" << backgroundColor.getBlue() << "m"
         << symbol
         << "\033[0m";
-        
+
     return os;
 }
 

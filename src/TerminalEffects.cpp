@@ -1,7 +1,7 @@
 #include "TerminalEffects.h"
 
 
-void TerminalEffects::changeBackgroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor) 
+void TerminalEffects::changeBackgroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor)
 {
     for (auto & row : terminalGrid)
         for (auto & symbol : row)
@@ -11,7 +11,7 @@ void TerminalEffects::changeBackgroundColorEffect(std::vector < std::vector <One
 }
 
 
-void TerminalEffects::changeForegroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor) 
+void TerminalEffects::changeForegroundColorEffect(std::vector < std::vector <OneSymbol> > & terminalGrid, const Color & newColor)
 {
     for (auto & row : terminalGrid)
         for (auto & symbol : row)
@@ -50,7 +50,7 @@ void TerminalEffects::invertColorEffect(std::vector<std::vector<OneSymbol>> &ter
     for (auto & row : terminalGrid)
         for (auto & symbol : row)
             symbol.invertColor();
-    
+
     return;
 }
 
@@ -63,7 +63,7 @@ void TerminalEffects::adjustBrightnessByIncrementEffect(std::vector<std::vector<
                 symbol.backgroundColor.adjustColor(increment);
                 symbol.foregroundColor.adjustColor(increment);
         }
-    
+
     return;
 }
 

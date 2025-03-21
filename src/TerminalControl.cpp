@@ -66,7 +66,7 @@ void TerminalControl::clearTerminal() const
 {
 	std::cout << "\033[H";		///< Move cursor to home and clear screen
 	std::cout.flush();
-	
+
 	return;
 }
 
@@ -100,7 +100,7 @@ void TerminalControl::setUpScaledGrid(bool scaleRatio)
 
 	double rowScale, colScale;
 	computeScalingFactors(rowScale, colScale, scaleRatio);
-	
+
 	#pragma omp target teams distribute parallel for collapse(2)
 	for (size_t i = 0; i < height; i++)
 	{
@@ -132,7 +132,7 @@ void TerminalControl::computeScalingFactors(double & rowScale, double & colScale
 
 	if (scaleRatio)
 		return;
-	
+
 	double uniformScale = std::max(rowScale, colScale);
 	rowScale = uniformScale;
 	colScale = uniformScale;

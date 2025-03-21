@@ -11,7 +11,7 @@ void displayMenu(const std::vector<MenuOption> &options)
 {
     std::vector <OneSymbol> headerText = stringToOneSymbolVector("Welcome to ", Colors::WHITE, Colors::BLACK);
     std::vector <OneSymbol> titleText = stringToOneSymbolVector("Terminal Graphics Demo!", Colors::CYAN, Colors::BLACK);
-    std::cout 
+    std::cout
         << headerText
         << titleText
         << "\nselect an option:\n";
@@ -36,15 +36,15 @@ void runMainMenu()
     std::vector <MenuOption> menuOptions =
     {
         {
-            stringToOneSymbolVector("Random Colors Grid", Colors::GREEN, Colors::BLACK),[]() 
-            { 
-                RandomColors randomColors; randomColors.run(); 
+            stringToOneSymbolVector("Random Colors Grid", Colors::GREEN, Colors::BLACK),[]()
+            {
+                RandomColors randomColors; randomColors.run();
             }
         },
         {
-            stringToOneSymbolVector("Grayscale Gradient", Colors::GRAY, Colors::BLACK),[]() 
-            { 
-                GrayScaleGradient grayScale; grayScale.run(); 
+            stringToOneSymbolVector("Grayscale Gradient", Colors::GRAY, Colors::BLACK),[]()
+            {
+                GrayScaleGradient grayScale; grayScale.run();
             }
         }
     };

@@ -2,7 +2,7 @@
 
 bool Color::operator==(const Color & other) const
 {
-    return 
+    return
         getRed() == other.getRed() &&
         getGreen() == other.getGreen() &&
         getBlue() == other.getBlue();
@@ -121,16 +121,16 @@ void Color::invertBlue()
 
 
 void Color::invertColor()
-{ 
+{
     invertRed();
     invertGreen();
-    invertBlue(); 
+    invertBlue();
 
     return;
 }
 
 
-void Color::scaleRed(const double coefficient) 
+void Color::scaleRed(const double coefficient)
 {
     red = std::clamp(red * coefficient, 0.0, 255.0);
 
@@ -138,7 +138,7 @@ void Color::scaleRed(const double coefficient)
 }
 
 
-void Color::scaleGreen(const double coefficient) 
+void Color::scaleGreen(const double coefficient)
 {
     green = std::clamp(green * coefficient, 0.0, 255.0);
 
@@ -146,7 +146,7 @@ void Color::scaleGreen(const double coefficient)
 }
 
 
-void Color::scaleBlue(const double coefficient) 
+void Color::scaleBlue(const double coefficient)
 {
     blue = std::clamp(blue * coefficient, 0.0, 255.0);
 
@@ -154,7 +154,7 @@ void Color::scaleBlue(const double coefficient)
 }
 
 
-void Color::scaleColor(const double coefficient) 
+void Color::scaleColor(const double coefficient)
 {
     scaleRed(coefficient);
     scaleGreen(coefficient);
@@ -173,7 +173,7 @@ void Color::scaleColor(const Color coefficient)
     return;
 }
 
-void Color::adjustRed(const double increment) 
+void Color::adjustRed(const double increment)
 {
     red = std::clamp(red + increment, 0.0, 255.0);
 
@@ -181,7 +181,7 @@ void Color::adjustRed(const double increment)
 }
 
 
-void Color::adjustGreen(const double increment) 
+void Color::adjustGreen(const double increment)
 {
     green = std::clamp(green + increment, 0.0, 255.0);
 
@@ -189,7 +189,7 @@ void Color::adjustGreen(const double increment)
 }
 
 
-void Color::adjustBlue(const double increment) 
+void Color::adjustBlue(const double increment)
 {
     blue = std::clamp(blue + increment, 0.0, 255.0);
 
@@ -197,12 +197,12 @@ void Color::adjustBlue(const double increment)
 }
 
 
-void Color::adjustColor(const double increment) 
+void Color::adjustColor(const double increment)
 {
     adjustRed(increment);
     adjustGreen(increment);
     adjustBlue(increment);
-    
+
     return;
 }
 
@@ -211,7 +211,7 @@ void Color::adjustColor(const Color increment)
     adjustRed(increment.getR());
     adjustGreen(increment.getG());
     adjustBlue(increment.getB());
-    
+
     return;
 }
 
