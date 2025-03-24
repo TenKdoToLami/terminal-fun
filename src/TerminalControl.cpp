@@ -92,6 +92,16 @@ void TerminalControl::printTerminal() const
 }
 
 
+std::string TerminalControl::toString() const
+{
+	std::string buffer;
+	for (size_t i = 0; i < scaledGrid.size(); i++)
+		for (size_t ii = 0; ii < scaledGrid.front().size(); ii++)
+			buffer += scaledGrid[i][ii].toString();
+
+	return buffer;
+}
+
 
 void TerminalControl::setUpScaledGrid(bool scaleRatio)
 {

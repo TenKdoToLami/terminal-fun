@@ -79,6 +79,8 @@ public:
     void printTerminal() const;
 
 
+    std::string toString() const;
+
     /**
      * @brief Adjusts the scaled grid to fit the current terminal size.
      *

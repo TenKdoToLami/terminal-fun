@@ -21,7 +21,7 @@ void OneSymbol::invertColor()
 }
 
 
-std::ostream &operator<<(std::ostream &os, const OneSymbol & oneSymbol)
+std::ostream & operator<<(std::ostream &os, const OneSymbol & oneSymbol)
 {
     const auto & [symbol,foregroundColor,backgroundColor] = oneSymbol;
     os  << "\033[38;2;"
@@ -37,11 +37,11 @@ std::ostream &operator<<(std::ostream &os, const OneSymbol & oneSymbol)
 
 std::string OneSymbol::toString() const
 {
-    return "\033[38;2;" + std::to_string(foregroundColor.getRed()) + ";" +
-           std::to_string(foregroundColor.getGreen()) + ";" +
-           std::to_string(foregroundColor.getBlue()) + "m" +
-           "\033[48;2;" + std::to_string(backgroundColor.getRed()) + ";" +
-           std::to_string(backgroundColor.getGreen()) + ";" +
-           std::to_string(backgroundColor.getBlue()) + "m" +
-           symbol + "\033[0m";
+    return
+        "\033[38;2;"
+        + std::to_string(foregroundColor.getRed()) + ";" + std::to_string(foregroundColor.getGreen()) + ";" + std::to_string(foregroundColor.getBlue()) + "m"
+        + "\033[48;2;"
+        + std::to_string(backgroundColor.getRed()) + ";" + std::to_string(backgroundColor.getGreen()) + ";" +std::to_string(backgroundColor.getBlue()) + "m"
+        + symbol
+        + "\033[0m";
 }
