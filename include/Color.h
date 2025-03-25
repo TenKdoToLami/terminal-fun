@@ -329,6 +329,16 @@ private:
     double green; ///< Green component (0-255)
     double blue;  ///< Blue component (0-255)
 
+
+    /**
+     * @brief Clamps a color component value to the valid range [0, 255].
+     *
+     * Ensures that the given value remains within the valid RGB color range.
+     * If the value is below 0.0, it returns 0.0. If above 255.0, it returns 255.0.
+     *
+     * @param value The color component value to clamp.
+     * @return The clamped color component value.
+     */
     inline double clampColor(double value) const;
 };
 
