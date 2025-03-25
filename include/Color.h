@@ -328,6 +328,8 @@ private:
     double red;   ///< Red component (0-255)
     double green; ///< Green component (0-255)
     double blue;  ///< Blue component (0-255)
+
+    inline double clampColor(double value) const;
 };
 
 /**

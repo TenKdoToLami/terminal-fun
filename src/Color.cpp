@@ -1,6 +1,7 @@
 #include "Color.h"
 
-bool Color::operator==(const Color & other) const
+
+bool Color::operator == (const Color & other) const
 {
     return
         getRed() == other.getRed() &&
@@ -9,7 +10,7 @@ bool Color::operator==(const Color & other) const
 }
 
 
-bool Color::operator!=(const Color & other) const
+bool Color::operator != (const Color & other) const
 {
     return !(*this == other);
 }
@@ -64,9 +65,9 @@ void Color::setColor(const Color newColor)
 
 void Color::setColor(const double Red, const double Green, const double Blue)
 {
-    red = std::clamp(Red, 0.0, 255.0);
-    blue = std::clamp(Blue, 0.0, 255.0);
-    green = std::clamp(Green, 0.0, 255.0);
+    red = clampColor(Red);
+    blue = clampColor(Blue);
+    green = clampColor(Green);
 
     return;
 }
@@ -74,7 +75,7 @@ void Color::setColor(const double Red, const double Green, const double Blue)
 
 void Color::setRed(const double value)
 {
-    red = std::clamp(value, 0.0, 255.0);
+    red = clampColor(value);
 
     return;
 }
@@ -82,7 +83,7 @@ void Color::setRed(const double value)
 
 void Color::setGreen(const double value)
 {
-    green = std::clamp(value, 0.0, 255.0);
+    green = clampColor(value);
 
     return;
 }
@@ -90,7 +91,7 @@ void Color::setGreen(const double value)
 
 void Color::setBlue(const double value)
 {
-    blue = std::clamp(value, 0.0, 255.0);
+    blue = clampColor(value);
 
     return;
 }
@@ -98,7 +99,7 @@ void Color::setBlue(const double value)
 
 void Color::invertRed()
 {
-    red = std::max(0.0,255.0 - red);
+    red = clampColor(255.0 - red);
 
     return;
 }
@@ -106,7 +107,7 @@ void Color::invertRed()
 
 void Color::invertGreen()
 {
-    green = std::max(0.0, 255.0 - green);
+    green = clampColor(255.0 - green);
 
     return;
 }
@@ -114,7 +115,7 @@ void Color::invertGreen()
 
 void Color::invertBlue()
 {
-    blue = std::max(0.0, 255.0 - blue);
+    blue = clampColor(255.0 - blue);
 
     return;
 }
@@ -132,7 +133,7 @@ void Color::invertColor()
 
 void Color::scaleRed(const double coefficient)
 {
-    red = std::clamp(red * coefficient, 0.0, 255.0);
+    red = clampColor(red * coefficient);
 
     return;
 }
@@ -140,7 +141,7 @@ void Color::scaleRed(const double coefficient)
 
 void Color::scaleGreen(const double coefficient)
 {
-    green = std::clamp(green * coefficient, 0.0, 255.0);
+    green = clampColor(green * coefficient);
 
     return;
 }
@@ -148,7 +149,7 @@ void Color::scaleGreen(const double coefficient)
 
 void Color::scaleBlue(const double coefficient)
 {
-    blue = std::clamp(blue * coefficient, 0.0, 255.0);
+    blue = clampColor(blue * coefficient);
 
     return;
 }
@@ -175,7 +176,7 @@ void Color::scaleColor(const Color coefficient)
 
 void Color::adjustRed(const double increment)
 {
-    red = std::clamp(red + increment, 0.0, 255.0);
+    red = clampColor(red + increment);
 
     return;
 }
@@ -183,7 +184,7 @@ void Color::adjustRed(const double increment)
 
 void Color::adjustGreen(const double increment)
 {
-    green = std::clamp(green + increment, 0.0, 255.0);
+    green = clampColor(green + increment);
 
     return;
 }
@@ -191,7 +192,7 @@ void Color::adjustGreen(const double increment)
 
 void Color::adjustBlue(const double increment)
 {
-    blue = std::clamp(blue + increment, 0.0, 255.0);
+    blue = clampColor(blue + increment);
 
     return;
 }
@@ -206,6 +207,7 @@ void Color::adjustColor(const double increment)
     return;
 }
 
+
 void Color::adjustColor(const Color increment)
 {
     adjustRed(increment.getR());
@@ -214,6 +216,7 @@ void Color::adjustColor(const Color increment)
 
     return;
 }
+
 
 void Color::convertToGrayscale()
 {
@@ -227,12 +230,19 @@ void Color::convertToGrayscale()
 void Color::blendWith(const Color & other, double factor)
 {
     factor = std::clamp(factor, 0.0, 1.0);
-    red = std::clamp((1 - factor) * red + factor * other.red, 0.0, 255.0);
-    green = std::clamp((1 - factor) * green + factor * other.green, 0.0, 255.0);
-    blue = std::clamp((1 - factor) * blue + factor * other.blue, 0.0, 255.0);
+    red = clampColor((1 - factor) * red + factor * other.red);
+    green = clampColor((1 - factor) * green + factor * other.green);
+    blue = clampColor((1 - factor) * blue + factor * other.blue);
 
     return;
 }
+
+
+inline double Color::clampColor(const double value) const
+{
+    return std::clamp(value, 0.0, 255.0);
+}
+
 
 namespace Colors
 {
