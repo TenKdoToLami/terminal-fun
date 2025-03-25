@@ -79,6 +79,15 @@ public:
     void printTerminal() const;
 
 
+    /**
+     * @brief Converts the terminal grid into a formatted string.
+     *
+     * This function iterates over the `scaledGrid` and converts each `OneSymbol`
+     * into a string representation using `OneSymbol::toString()`. The resulting
+     * strings are concatenated into a single output buffer.
+     *
+     * @return A formatted string representing the terminal grid.
+     */
     std::string toString() const;
 
     /**
