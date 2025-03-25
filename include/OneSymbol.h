@@ -80,8 +80,17 @@ public:
      */
     friend std::ostream & operator << (std::ostream & os, const OneSymbol & oneSymbol);
 
+
+    /**
+     * @brief Converts the OneSymbol object to a formatted string with ANSI escape codes.
+     *
+     * Generates a string representation of the symbol with its foreground and background colors
+     * using ANSI escape codes. This ensures proper rendering of colored text in terminal outputs.
+     *
+     * @return A string containing the ANSI-formatted symbol with color settings.
+     */
     std::string toString() const;
-//private:
+
     char symbol;                  ///< The character symbol represented by the OneSymbol object.
     Color foregroundColor;        ///< The foreground color of the symbol.
     Color backgroundColor;        ///< The background color of the symbol.
